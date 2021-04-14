@@ -5,8 +5,6 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-// import { browserHistory } from './react-router'
-// browserHistory.push('/some/path')
 
 import logo from './logo.png';
 import check from './assets/check.svg'
@@ -22,10 +20,9 @@ import SuccessPage from './components/Success';
 import FailedPage from './components/Failed';
 
 function App() {
-  // const history = useHistory();
   const [step,setStep] = React.useState(1);
   const [paymentUrl,setPaymentUrl] = React.useState('');
-  
+  const [ImageUrl,setImageUrl] = React.useState('');
   const [family,setFamily] = React.useState(false)
   const [values,setValues] = React.useState({
     employeeDetails:[],
@@ -63,7 +60,7 @@ function App() {
       employeeId:values.employeeDetails[0].id,
       employeeName:values.employeeDetails[0].name,
       identificationType:values.employeeDetails[0].idprooftype,
-      // identificationDocUrl:values.employeeDetails[0].idproof,
+      identificationDocUrl:ImageUrl,
       mobile:values.employeeDetails[0].phone,
       packageDetails:pkg,
       totalConvienceCharge:0,
@@ -71,7 +68,6 @@ function App() {
       totalprice:total,
     }
     
-    console.log(data)
     // setStep(step+1)
     
     // console.log(values.employeeDetails[0].idproof)
@@ -80,18 +76,20 @@ function App() {
     formData.append("file",values.employeeDetails[0].idproof[0])
     formData.append("fileName",values.employeeDetails[0].idproof[0].name)
     formData.append("mediaType","image")
- console.log(formData)
+    console.log(formData)
     const serverOrigin ='https://reachlocalads.com';
-   // const serverOrigin ='http://13.233.125.97:8080';
-    fetch( serverOrigin+"/upload/ext/file",{
+    //const serverOrigin ='http://13.233.125.97:8080';
+     fetch(serverOrigin+"/upload/ext/file",{
       method: 'POST',
       body: formData,
-    }).then(d=>d.json()).then(json=>{
+    }).then(async d=>await d.json()).then(json=>{
+      setImageUrl(json.url)
       console.log(json)
     }).catch(err=>{
       console.log(err)
     })
-
+  
+    console.log(data)
     fetch(`${serverOrigin}/incoming-lead/receive/w/appointment`,{
       method:"POST",
       body:JSON.stringify(data),
@@ -155,7 +153,6 @@ function App() {
                             <div key={key} className="text-md text-secondary">{el.name} +91{el.phone}</div> 
                           ))} */}
                         </div> 
-
                       </div>
                       <div className="ml-auto self-center w-1/2 md:w-1/5">
                         <div onClick={()=>{setStep(1)}} className="text-center p-2 border text-primary rounded mx-3">CHANGE</div>
