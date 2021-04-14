@@ -1,0 +1,21 @@
+.Rectangle {
+  left: 1908px;
+  top: 230px;
+  width: 770px;
+  height: 59px;
+  background: #03A9F4;
+  border: 0px solid #343F4B;
+  border-radius: 0px;
+  }
+  .Text {
+    left: 1957px;
+    top: 247px;
+    width: 262px;
+    height: 24px;
+    color: #FFFFFF;
+    font-family: Lato;
+    font-size: 18px;
+    text-align: left;
+    line-height: 1px;
+    padding: 5px;
+    }
