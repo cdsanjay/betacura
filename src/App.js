@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import logo from './logo.png';
+import logoLeft from "./logoLeft.jpeg";
 import check from './assets/check.svg'
 import './helperCss/bootstrap.css';
 import './helperCss/tailwind.css'; 
@@ -130,7 +131,19 @@ function App() {
         <Route path="/">
           <div className="bg-light">
             <div className="container">  
-              <img src={logo} alt={"Logo"} className="w-3/5 md:w-1/5 mx-auto" />
+            <div className="flex flex-wrap justify-around">
+                <img
+                  src={logoLeft}
+                  alt={"LogoLeft"}
+                  className="w-1/5 md:w-2/12 md:h-32 my-7"
+                />
+                <img
+                  src={logo}
+                  alt={"Logo"}
+                  className="w-1/5 md:w-2/12  my-7"
+                />
+              </div>
+
               <div className="container-fluid">
 
                 {/* Employee Details */}
