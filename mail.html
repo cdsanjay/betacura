@@ -1,0 +1,328 @@
+<html>
+<head>
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.wrapper table tbody tr .head{
+    font-weight: 600;
+  }
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <table>
+        <caption>New Policy Appointment</caption>
+        <tbody>
+          <tr>
+            <td class="head" >AppointmentDate1</td>
+            <td  >2021-05-23</td>
+          </tr>
+          <tr>
+            <td class="head"  >AppointmentDate2</td>
+            <td  >2021-05-24</td>
+          </tr>
+          <tr>
+            <td class="head"   >Email</td>
+            <td  >idsanjay81@gmail.com</td>
+          </tr>
+          <tr>
+            <td  class="head"  >EmployeeId</td>
+            <td  >121212</td>
+          </tr>
+          <tr>
+            <td class="head"   >EmployeeName</td>
+            <td  >Baburam Adhikari</td>
+          </tr>
+          <tr>
+            <td  class="head"  >Mobile</td>
+            <td  >9823119554</td>
+          </tr>
+          <!-- packge table -->
+          <tr>
+            <td  class="head"  >PackageDetails</td>
+
+            <td  >
+                <!-- first details -->
+                <table>
+
+                <tr>
+                  <td class="head">Name</td>
+                  <td>Baburam Adhikari</td>
+                </tr>
+                <tr>
+                  <td class="head">Email</td>
+                  <td>idsanjay81@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="head">Mobile</td>
+                    <td>9823119554</td>
+                  </tr>
+                  <tr>
+                    <td class="head">RelationshipType</td>
+                    <td>Self</td>
+                  </tr>
+                  <tr>
+                    <td class="head">Packages</td>
+                    <!-- table  -->
+                    <td>
+                        <table>
+
+                            <tr>
+                              <td class="head">PackageName</td>
+                              <td>Package B</td>
+                            </tr>
+                            <tr>
+                                <td class="head">AddOnPackages</td>
+                                <!-- table -->
+                                <td><table>
+                                    <tr>
+                                      <td class="head">Price</td>
+                                      <td>1100</td>
+                                    </tr>
+                                  </table></td>
+                                <!-- table end -->
+                              </tr>
+                          </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="head">Appointment</td>
+                    <!-- table -->
+                    <td>
+                        <table >
+                              <tr>
+                                <td class="head">Date1</td>
+                                <td>2021-05-23</td>
+                              </tr>
+                              <tr>
+                                <td class="head">Date2</td>
+                                <td>2021-05-24</td>
+                              </tr>
+                              <tr>
+                                <td class="head">Time1</td>
+                                <td>7:00 AM - 9:00 AM</td>
+                              </tr>
+                              <tr>
+                                <td class="head">Time2</td>
+                                <td>7:00 AM - 9:00 AM</td>
+                              </tr>
+                          </table>
+                    </td>
+                  </tr>
+              </table>
+              <!-- Second details -->
+              <table>
+
+                <tr>
+                  <td class="head">Name</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td class="head">Email</td>
+                  <td>idsanjay81@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="head">Mobile</td>
+                    <td>9823119552</td>
+                  </tr>
+                  <tr>
+                    <td class="head">Packages</td>
+                    <!-- table  -->
+                    <td>
+                        <table>
+
+                            <tr>
+                              <td class="head">PackageName</td>
+                              <td>Package B</td>
+                            </tr>
+                            <tr>
+                                <td class="head">Price</td>
+                                <td>2000</td>
+                              </tr>
+                            <tr>
+                                <td class="head">AddOnPackages</td>
+                                <!-- table -->
+                                <td><table>
+
+                                  </table></td>
+                                <!-- table end -->
+                              </tr>
+                          </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="head">Appointment</td>
+                    <!-- table -->
+                    <td>
+                        <table >
+
+                          </table>
+                    </td>
+                  </tr>
+              </table>
+              <!-- third table -->
+              <table>
+
+                <tr>
+                  <td class="head">Name</td>
+                  <td>B</td>
+                </tr>
+                <tr>
+                  <td class="head">Email</td>
+                  <td>idsanjay81@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="head">Mobile</td>
+                    <td>9823119552</td>
+                  </tr>
+                  <tr>
+                    <td class="head">Packages</td>
+                    <!-- table  -->
+                    <td>
+                        <table>
+
+                            <tr>
+                              <td class="head">PackageName</td>
+                              <td>Package A</td>
+                            </tr>
+                            <tr>
+                                <td class="head">Price</td>
+                                <td>3100</td>
+                              </tr>
+                            <tr>
+                                <td class="head">AddOnPackages</td>
+                                <!-- table -->
+                                <td><table>
+                                    <tr>
+                                        <td class="head">Name</td>
+                                        <td>CA125 - Ovarian Cancer marker</td>
+                                      </tr>
+                                        <tr>
+                                          <td class="head">Price</td>
+                                          <td>1100</td>
+                                        </tr>
+                                      </table></td>
+
+                                <!-- table end -->
+                              </tr>
+                          </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="head">Appointment</td>
+                    <!-- table -->
+                    <td>
+                        <table >
+
+                          </table>
+                    </td>
+                  </tr>
+              </table>
+            </td>
+
+
+          </tr>
+          <!-- packge table end-->
+
+          <tr>
+            <td class="head"   >PaymentMode</td>
+            <td  >ONLINE</td>
+          </tr>
+          <tr>
+            <td  class="head"  >Totalprice</td>
+            <td  >6200</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+</body>
+</html>
