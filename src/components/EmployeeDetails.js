@@ -69,10 +69,10 @@ export default function EmployeeDetails(props){
                   <select name={`family[${index}].relationshipType`} className="form-select" ref={register({required:true})} >
                     <option value="">- Select -</option>
                     {[
-                        "Grand Father",
-                        "Grand Mother",
                         "Father",
                         "Mother",
+                        "Father in Law",
+                        "Mother in Law",
                         "Husband",
                         "Wife",
                         "Son",
