@@ -69,7 +69,7 @@ router.post(
         try {
             // create
             let savedData = await mailSender({
-                to: [process.env.FORM_SEND_EMAIL, req.body.email],
+                to: [process.env.REACT_APP_FORM_SEND_EMAIL, req.body.email],
                 subject: generalTemplate.generic.subject(`Appointment for Employee - ${req.body.employeeName} - ${req.body.employeeId}`),
                 html: generalTemplate.generic.html(req.body),
             });
