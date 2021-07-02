@@ -20,7 +20,7 @@ async function mailSender({
     },
   });
   const info = await transport.sendMail({
-    from: process.env.EMAIL_AUTH_ID,
+    from: process.env.REACT_APP_FORM_SENDER_EMAIL,
     to,
     subject,
     html,
