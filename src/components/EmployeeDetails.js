@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 const defaultValues = {
   name1: "Baburam Adhikari",
   id: "121212",
@@ -32,13 +34,37 @@ export default function EmployeeDetails(props){
 
     const [idproof,setIdproof] = React.useState("")
 
-    const onSubmit = (data) => {
-      console.log('data', data, values)
-      var emp1 = {name:data.name1,id:data.id,idprooftype:data.idprooftype,idproof:data.idproof,phone:data.phone1,email:data.email1}
+    const onSubmit = async (data) => {
+      if(data?.id) {
+        const body = {
+          employeeID: data?.id,
+          name: data?.name1,
+          email: data?.email1,
+          phone: data?.phone
+        }
+        await fetch(`${process.env.REACT_APP_API_HOST?.trim()}/api/employee/validate/`,
+            {
+              method: 'POST',
+              body: JSON.stringify(body),
+              headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+            }).then(t=>t.json()).then((responseData) => {
+            if(!responseData?.isValid){
+              return NotificationManager.error(responseData?.message);
+            }
+          var emp1 = {name:data.name1,id:data.id,idprooftype:data.idprooftype,idproof:data.idproof,phone:data.phone1,email:data.email1}
 
-      // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
-      setValues({...values,employeeDetails:family ? [emp1,...data?.family] : [emp1] })
-      handleStep();
+          // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
+          setValues({...values,employeeDetails:family ? [emp1,...data?.family] : [emp1] })
+          handleStep();
+            }
+        ).catch(()=>{
+          NotificationManager.error('Error processing your request! Server is offline');
+
+        })
+
+      }else {
+        NotificationManager.error('Please input Employee ID');
+      }
     }
 
     const getFamilyUI = () => {
@@ -123,6 +149,7 @@ export default function EmployeeDetails(props){
     }
     return (
     <div className="container-fluid p-0 bg-white p-4 border shadow-sm">
+      <NotificationContainer/>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="col-md-4">

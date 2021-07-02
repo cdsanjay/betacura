@@ -45,6 +45,7 @@ function App() {
     appointmentDetails:[],
     charge:false
   })
+console.log('employee values',values);
 
   const handleStep = () => {
     setStep(step+1)
@@ -145,7 +146,6 @@ function App() {
       amount: totalAmount,
       payment: payment
     }
-    console.log('REACT_APP_API_HOST',process.env.REACT_APP_API_HOST?.trim());
     const data = await fetch(`${process.env.REACT_APP_API_HOST?.trim()}/api/appointment/save`,
         {
           method: 'POST',
