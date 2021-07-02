@@ -145,17 +145,18 @@ function App() {
       amount: totalAmount,
       payment: payment
     }
-    const data = await fetch(`${process.env.REACT_APP_API_HOST}/api/appointment/save`,
+    console.log('REACT_APP_API_HOST',process.env.REACT_APP_API_HOST?.trim());
+    const data = await fetch(`${process.env.REACT_APP_API_HOST?.trim()}/api/appointment/save`,
         {
           method: 'POST',
           body: JSON.stringify(body),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         }).then((t) => {
-          // window.location ='/success'
+          window.location ='/success'
           t.json();
         }
     ).catch(()=>{
-      // window.location ='/paymentfailed'
+      window.location ='/paymentfailed'
     })
   }
   async function displayRazorpay(totalAmount, appointmentData, paymentType) {
@@ -173,7 +174,7 @@ function App() {
         {
           method: 'POST',
           body: JSON.stringify(body),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         }).then((t) =>
         t.json()
     )
