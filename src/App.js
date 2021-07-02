@@ -151,11 +151,11 @@ function App() {
           body: JSON.stringify(body),
           headers: { 'Content-Type': 'application/json' },
         }).then((t) => {
-          window.location ='/success'
+          // window.location ='/success'
           t.json();
         }
     ).catch(()=>{
-      window.location ='/paymentfailed'
+      // window.location ='/paymentfailed'
     })
   }
   async function displayRazorpay(totalAmount, appointmentData, paymentType) {
