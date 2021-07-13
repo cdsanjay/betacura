@@ -295,7 +295,7 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
 }
 
 export default function PackageDetails(props) {
-
+  const discountForEmployee = parseFloat(process.env.REACT_APP_EMPLOYEE_DISCOUNT);
   const [customizePrice1, setCustomizePrice1] = React.useState(0);
   const [familyPackages, setFamilyPackages] = React.useState([]);
   const [familyPrice, setFamilyPrice] = React.useState([]);
@@ -407,8 +407,8 @@ export default function PackageDetails(props) {
     });
     setAddonPrice1(price1);
     setCustomizePrice1(price2);
-    if (price2 > 2000) {
-      var calc1 = price1 + price2 - 2000;
+    if (price2 > discountForEmployee) {
+      var calc1 = price1 + price2 - discountForEmployee;
       setPrice1(calc1);
     } else {
       setPrice1(price1);
@@ -608,13 +608,13 @@ export default function PackageDetails(props) {
                                 <span className="text-sm md:text-lg font-medium text-dark px-2">
                               {" "}
                                   (Rs.{" "}
-                                  {customizePrice1 < 2000 ? (
+                                  {customizePrice1 < discountForEmployee ? (
                                       <s> {customizePrice1} </s>
                                   ) : (
                                       <>
                                         {" "}
-                                        {customizePrice1} - 2000 ={" "}
-                                        {customizePrice1 - 2000}{" "}
+                                        {customizePrice1} - discountForEmployee ={" "}
+                                        {customizePrice1 - discountForEmployee}{" "}
                                       </>
                                   )}{" "}
                                   )
@@ -764,14 +764,14 @@ export default function PackageDetails(props) {
             ) : (
                 <></>
             )}
-            {/* {customizePrice1 > 2000 ?<>
+            {/* {customizePrice1 > discountForEmployee ?<>
           <div className="flex items-center justify-between my-2">
-            <div className="text-lg font-medium">Employee offer for customize package ( Rs. 2000 Off ) </div>
-            <div className="text-lg font-medium"> Rs. {customizePrice1} - 2000 </div>
+            <div className="text-lg font-medium">Employee offer for customize package ( Rs. discountForEmployee Off ) </div>
+            <div className="text-lg font-medium"> Rs. {customizePrice1} - discountForEmployee </div>
           </div>
           <div className="flex items-center justify-between my-2">
             <div className="text-lg font-medium"> </div>
-            <div className="text-lg font-medium"> Rs. {customizePrice1 - 2000 }</div>
+            <div className="text-lg font-medium"> Rs. {customizePrice1 - discountForEmployee }</div>
           </div>
         </>:<></>} */}
             <div className="flex items-center justify-between my-2">
