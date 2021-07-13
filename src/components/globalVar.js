@@ -1,7 +1,7 @@
 export const packages = [
     {
         name: "Package A",
-        price: 2000,
+        price: 1450,
         count: 29,
         data: [
             "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
@@ -13,28 +13,28 @@ export const packages = [
             "Teleconsultation",
         ],
     },
-    {
-        name: "Package B",
-        price: 2000,
-        count: 23,
-        data: [
-            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-            "Diabetic Checkup (F.B.S, HBA1C)",
-            "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-            "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-            "Thyroid Profile (T3, T4, TSH)",
-            "Radiological Test (ECG)",
-            "USG Abdomen",
-            "Physician Examination",
-            "Teleconsultation",
-        ],
-    },
+    // {
+    //     name: "Package B",
+    //     price: 2000,
+    //     count: 23,
+    //     data: [
+    //         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
+    //         "Diabetic Checkup (F.B.S, HBA1C)",
+    //         "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+    //         "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
+    //         "Thyroid Profile (T3, T4, TSH)",
+    //         "Radiological Test (ECG)",
+    //         "USG Abdomen",
+    //         "Physician Examination",
+    //         "Teleconsultation",
+    //     ],
+    // },
 ];
 
 export const customizePackageList = [
     {
         value: "Vital Check ( Blood Sugar, BP & PR ) - 3 Tests",
-        price: 200,
+        price: 150,
         sub: [
             "Blood Glucose fasting / Random",
             "Blood Pressure Check (BP)",
@@ -43,7 +43,7 @@ export const customizePackageList = [
     },
     {
         value: "Thyroid (TFT) - 5 Tests",
-        price: 900,
+        price: 500,
         sub: [
             "Total Tri-iodothyronine (T3)",
             "Total Thyroxine (T4)",
@@ -54,7 +54,7 @@ export const customizePackageList = [
     },
     {
         value: "Heart Risk Profile (Lipid) - 9 Tests",
-        price: 600,
+        price: 450,
         sub: [
             "Total Cholesterol",
             "HDL (Good Cholesterol)",
@@ -69,7 +69,7 @@ export const customizePackageList = [
     },
     {
         value: "Liver Function Test (LFT) - 11 Tests",
-        price: 600,
+        price: 450,
         sub: [
             "Billirubin-TOtal",
             "Billirubin-Direct",
@@ -86,7 +86,7 @@ export const customizePackageList = [
     },
     {
         value: "Kidney Function Test (KFT) - 6 Tests + Electrolytes",
-        price: 700,
+        price: 450,
         sub: [
             "Uric Acid",
             "SErum Urea",
@@ -99,7 +99,7 @@ export const customizePackageList = [
     },
     {
         value: "Complete Urine Routine Analysis (CUE) - 20 Tests",
-        price: 500,
+        price: 350,
         sub: [
             "Color",
             "Specific Gravity",
@@ -125,7 +125,7 @@ export const customizePackageList = [
     },
     {
         value: "Complete Blood Counr (CBC) - 24 Tests",
-        price: 500,
+        price: 300,
         sub: [
             "Hemoglobin (Hb)",
             "Total WBC Count (TLC)",
@@ -153,16 +153,7 @@ export const customizePackageList = [
             "Absolute Basophils Count",
         ],
     },
-    { value: "Vitamin B12", price: 700, sub: [] },
-    { value: "Vitamin D-3 (25-Hydroxy)", price: 1000, sub: [] },
-    { value: "ECG", price: 500, sub: [] },
-    { value: "USG(Abdomen & Pelvis)", price: 1100, sub: [] },
-    { value: "Chest X-ray", price: 400, sub: [] },
-    { value: "PSA (Male)", price: 600, sub: [] },
-    { value: "Eye Checkup", price: 250, sub: [] },
-    { value: "GP Consulation", price: 300, sub: [] },
-    { value: "Mamography", price: 1200, sub: [] },
-    { value: "Pap Smear (Female)", price: 1500, sub: [] },
+    { value: "Vitamin B12 & D-3 (25-Hydroxy)", price: 1550, sub: [] },
 ];
 
 export const addons = [
@@ -172,11 +163,15 @@ export const addons = [
     },
     { value: "Beta Human Chorionic Gonodotropin (Beta HCG) ", price: 600 },
     { value: "Bilirubin (Total, Direct & Indirect ) ", price: 230 },
+    { value: "Blood Glucose", price: 80 },
+    { value: "Blood Grouping (A B O) and Rh Type", price: 120 },
     { value: "CA125 - Ovarian Cancer marker ", price: 1100 },
     { value: "CA15.3 - Breast Cancer marker ", price: 1150 },
     { value: "Complete Blood Count (CBC) ", price: 300 },
+    { value: "Complete Urine Analysis (CUE) ", price: 150 },
     { value: "Urine Culture & Sensitivity ", price: 500 },
     { value: "Electrolyte Profile (Potassium, Sodium & Chloride) ", price: 300 },
+    { value: "Erythrocyte Sedimentation Rate (ESR) ", price: 100 },
     { value: "Fever Panel (MP-AG,Widal,CUE,ESR,CBC/PS) ", price: 750 },
     { value: "Folate Serum (Folic Acid) ", price: 1000 },
     { value: "Follicle Stimulating Hormone (FSH) ", price: 450 },
@@ -192,15 +187,15 @@ export const addons = [
     { value: "Liver Function Test (LFT) - Extended ", price: 500 },
     { value: "Luteinising Hormone (LH) ", price: 450 },
     { value: "Typhi Dot Combo (Salmonella typhi IgG & IgM) ", price: 500 },
+    { value: "Peripheral Smear Examination", price: 200 },
     { value: "Prolactin ", price: 450 },
-    {
-        value: "Rubella virus IgG Antibody or IgM Antibody (each test) ",
-        price: 500,
-    },
+    { value: "VDRL RPR (Serology for Syphilis)", price: 200 },
+    {value: "Rubella virus IgG Antibody or IgM Antibody (each test) ",price: 500},
     { value: "Testosterone Total ", price: 550 },
     { value: "Thyroid Panel - II (TSH, TT3, TT4, FT3 & FT4) ", price: 900 },
     { value: "Thyroid Panel - IV (FT3, FT4 & TSH) ", price: 750 },
     { value: "Thyroid Panel (T3,T4 & TSH) ", price: 500 },
+    { value: "Thyroid Stimulating Hormone (TSH)", price: 200 },
     { value: "Total IgE ", price: 750 },
     { value: "Vitamin - B12 ", price: 660 },
     { value: "Vitamin D-3 (25 - Hydroxy) ", price: 1330 },
@@ -213,4 +208,6 @@ export const addons = [
     { value: "TORCH 10 PANEL (IgG & IgM) ", price: 2200 },
     { value: "TORCH 5 Panel (IgG) or (IgM) EACH sold Saperatly ", price: 1100 },
     { value: "Triple Marker with graph ", price: 2000 },
+    { value: "Physical Examination with BP, BMI", price: 250 },
+    { value: "PSA ", price: 550 },
 ];

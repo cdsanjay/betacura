@@ -569,7 +569,7 @@ export default function PackageDetails(props) {
                               <span key={k}> {e + ", "} </span>
                           ))}
                         </div>
-                        {selectedPackage1 !== "2" && selectedPackage1 !== "" ? (
+                        {selectedPackage1 !== "1" && selectedPackage1 !== "" ? (
                             <div className="ml-auto text-right pl-4 font-medium w-full md:w-1/6">
                               <div>
                                 {" "}
@@ -588,7 +588,7 @@ export default function PackageDetails(props) {
                         )}
                       </div>
                       <div
-                          className={selectedPackage1 === "2" ? "block" : "hidden"}
+                          className={selectedPackage1 === "1" ? "block" : "hidden"}
                       >
                         <div className="accordion my-2" id="accordionExample">
                           <div className="accordion-item">
@@ -613,7 +613,7 @@ export default function PackageDetails(props) {
                                   ) : (
                                       <>
                                         {" "}
-                                        {customizePrice1} - discountForEmployee ={" "}
+                                        {customizePrice1} - {discountForEmployee} ={" "}
                                         {customizePrice1 - discountForEmployee}{" "}
                                       </>
                                   )}{" "}
@@ -767,7 +767,7 @@ export default function PackageDetails(props) {
             {/* {customizePrice1 > discountForEmployee ?<>
           <div className="flex items-center justify-between my-2">
             <div className="text-lg font-medium">Employee offer for customize package ( Rs. discountForEmployee Off ) </div>
-            <div className="text-lg font-medium"> Rs. {customizePrice1} - discountForEmployee </div>
+            <div className="text-lg font-medium"> Rs. {customizePrice1} - {discountForEmployee} </div>
           </div>
           <div className="flex items-center justify-between my-2">
             <div className="text-lg font-medium"> </div>
