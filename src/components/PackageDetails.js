@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { addons, customizePackageList } from "./globalVar";
+import {addons, customizePackageList, packages} from "./globalVar";
 
 
 
@@ -15,36 +15,7 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
       values?.packageDetails[index] ? values.packageDetails[index]?.category : ""
   );
   const packageList = [
-    {
-      name: "Package A",
-      price: 2000,
-      count: 29,
-      data: [
-        "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
-    {
-      name: "Package B",
-      price: 2000,
-      count: 23,
-      data: [
-        "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Thyroid Profile (T3, T4, TSH)",
-        "Radiological Test (ECG)",
-        "USG Abdomen",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
+    ...packages,
     { name: "Customize Package", price: customizePrice2, count: 0, data: [] },
   ];
   const [selectedPackage, setSelectedPackage] = React.useState(
@@ -361,36 +332,7 @@ export default function PackageDetails(props) {
   );
 
   const packageList = [
-    {
-      name: "Package A",
-      price: 2000,
-      count: 29,
-      data: [
-        "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
-    {
-      name: "Package B",
-      price: 2000,
-      count: 23,
-      data: [
-        "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Thyroid Profile (T3, T4, TSH)",
-        "Radiological Test (ECG)",
-        "USG Abdomen",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
+    ...packages,
     { name: "Customize Package", price: customizePrice1, count: 0, data: [] },
   ];
 
