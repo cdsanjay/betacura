@@ -16,24 +16,32 @@ export default function AppointmentDetails(props) {
   date2.setDate(date2.getDate() + 3);
 
   const { values, setValues, handleStep, family } = props;
+  const defaultValues = {
+    street1: values.appointmentDetails[0]?.address,
+    locality1: values.appointmentDetails[0]?.locality,
+    city1: values.appointmentDetails[0]?.city,
+    state1: values.appointmentDetails[0]?.state,
+    zipCode1: values.appointmentDetails[0]?.zipCode,
+    landmark1: values.appointmentDetails[0]?.landmark,
+    date1: values.appointmentDetails[0]?.date1,
+    time1: values.appointmentDetails[0]?.time1,
+    date2: values.appointmentDetails[0]?.date2,
+    time2: values.appointmentDetails[0]?.time2,
+  };
+  values?.appointmentDetails?.map((value, index) => {
+    if(index === 0) return ;
+    defaultValues[`street2_${index}`] = values.appointmentDetails[0]?.address;
+    defaultValues[`locality2_${index}`] = values.appointmentDetails[0]?.locality;
+    defaultValues[`city2_${index}`] = values.appointmentDetails[0]?.city;
+    defaultValues[`state2_${index}`] = values.appointmentDetails[0]?.state;
+    defaultValues[`landmark2_${index}`] = values.appointmentDetails[0]?.landmark;
+    defaultValues[`zipCode2_${index}`] = values.appointmentDetails[0]?.zipCode;
+  })
+
   const { register, getValues, setValue, handleSubmit, errors, control } =
       useForm({
-        defaultValues: {
-          street1: values.appointmentDetails[0]?.address,
-          locality1: values.appointmentDetails[0]?.locality,
-          city1: values.appointmentDetails[0]?.city,
-          state1: values.appointmentDetails[0]?.state,
-          landmark1: values.appointmentDetails[0]?.landmark,
-          date1: values.appointmentDetails[0]?.date1,
-          time1: values.appointmentDetails[0]?.time1,
-          date2: values.appointmentDetails[0]?.date2,
-          time2: values.appointmentDetails[0]?.time2,
-          street2: values.appointmentDetails[1]?.address,
-          locality2: values.appointmentDetails[1]?.locality,
-          city2: values.appointmentDetails[1]?.city,
-          state2: values.appointmentDetails[1]?.state,
-          landmark2: values.appointmentDetails[1]?.landmark,
-        },
+
+        defaultValues: defaultValues,
       });
 
   const timeList = [
@@ -52,6 +60,7 @@ export default function AppointmentDetails(props) {
         setValue(`street2_${index}`, getValues("street1"));
         setValue(`locality2_${index}`, getValues("locality1"));
         setValue(`landmark2_${index}`, getValues("landmark1"));
+        setValue(`zipCode2_${index}`, getValues("zipCode1"));
         // setValue("date3", getValues("date1"));
         // setValue("time3", getValues("time1"));
         // setValue("date4", getValues("date2"));
@@ -66,6 +75,7 @@ export default function AppointmentDetails(props) {
         setValue(`street2_${index}`, "");
         setValue(`locality2_${index}`, "");
         setValue(`landmark2_${index}`, "");
+        setValue(`zipCode2_${index}`, "");
         // setValue("date3", null);
         // setValue("time3", null);
         // setValue("date4", null);
@@ -90,12 +100,13 @@ export default function AppointmentDetails(props) {
       date2: data.date2,
       time1: data.time1,
       time2: data.time2,
+      zipCode: data.zipCode1,
     };
 
     const aptmFamily = [];
     for(const [index, family] of values.employeeDetails?.entries()){
       if(index === 0) {
-      //   do nothing
+        //   do nothing
       }
       else aptmFamily.push({
         address: data[`street2_${index}`],
@@ -103,9 +114,10 @@ export default function AppointmentDetails(props) {
         city: data[`city2_${index}`],
         state: data[`state2_${index}`],
         landmark: data[`landmark2_${index}`],
+        zipCode: data[`zipCode2_${index}`],
       });
     }
-  console.log("aptmFamily", aptmFamily);
+    console.log("aptmFamily", aptmFamily);
     // const apmt2 = {
     //   address: data.street2,
     //   locality: data.locality2,
@@ -208,6 +220,20 @@ export default function AppointmentDetails(props) {
               />
               {errors.landmark1?.type === "required" && (
                   <small className="text-danger">Landmark is required</small>
+              )}
+            </div>
+
+            <div className="col-md-4 my-1">
+              <div className="py-2 text-dark font-medium">ZipCode</div>
+              <input
+                  type="text"
+                  name="zipCode1"
+                  ref={register}
+                  className="form-control"
+                  placeholder="Zip Code"
+              />
+              {errors.zipCode1?.type === "required" && (
+                  <small className="text-danger">Zip Code is required</small>
               )}
             </div>
 
@@ -392,6 +418,20 @@ export default function AppointmentDetails(props) {
                               <small className="text-danger">
                                 Landmark is required
                               </small>
+                          )}
+                        </div>
+
+                        <div className="col-md-4 my-1">
+                          <div className="py-2 text-dark font-medium">ZipCode</div>
+                          <input
+                              type="text"
+                              name={`zipCode2_${index}`}
+                              ref={register}
+                              className="form-control"
+                              placeholder="Zip Code"
+                          />
+                          {errors.zipCode2?.type === "required" && (
+                              <small className="text-danger">Zip Code is required</small>
                           )}
                         </div>
 
