@@ -59,6 +59,8 @@ console.log('employee values',values);
         name:el.name,
         email:el.email,
         mobile:el.phone,
+        gender:el.gender,
+        age:el.age,
         relationshipType: key===0 ? "Self" : el.relationshipType,
         packages:{
           packageName:values.packageDetails[key].packageName,
@@ -237,7 +239,7 @@ console.log('employee values',values);
               <div className="container-fluid">
 
                 {/* Employee Details */}
-                {values.employeeDetails.length > 0 ?<>
+                {values?.employeeDetails.length > 0 ?<>
                   <div className="container-fluid p-0 md:p-2 my-3">
                     <div className="flex-row md:flex bg-white p-3 cursor-pointer border shadow-sm">
                       <div className="flex items-center w-full md:w-4/5">
@@ -275,7 +277,7 @@ console.log('employee values',values);
                   </div>
                 </>}
                 {/* Package Details */}
-                {values.packageDetails.length > 0 ?<>
+                {values?.packageDetails?.length > 0 ?<>
                   <div className="container-fluid p-0 md:p-2 my-3">
                     <div className="flex-row md:flex bg-white p-3 cursor-pointer border shadow-sm">
                       <div className="flex items-center w-full md:w-4/5">
@@ -285,20 +287,20 @@ console.log('employee values',values);
                             <div>Package Details</div>
                             <img src={check} alt={"Check"} width="20px" className="mx-3" />
                           </div>
-                          {values.employeeDetails.length > 1?<>
-                            {values.packageDetails.map((el,key)=>(
+                          {values?.employeeDetails?.length > 1?<>
+                            {values?.packageDetails?.map((el,key)=>(
                               <>
                                 <div key={key} className="text-dark text-sm">
                                   <span className="text-sm md:text-lg text-secondary font-medium">{values.employeeDetails[key].name}</span>
-                                  : {el.packageName}</div>
+                                  : {el?.packageName}</div>
                                 <div className="text-sm">
                                   <span className="text-secondary">Add-on Package: </span>
-                                  <span>{el.addons.map(el=>(el+","))}</span>
+                                  <span>{el?.addons?.map(el=>(el+","))}</span>
                                 </div>
                               </>
                             ))}
                           </>:<>
-                            {values.packageDetails.map((el,key)=>(
+                            {values?.packageDetails?.map((el,key)=>(
                               <>
                                 <div key={key} className="text-dark text-sm">Package: {el.packageName}</div>
                                 <div className="text-dark text-sm">Add-on Package: {el.addons?.map(el=>(el+","))}</div>

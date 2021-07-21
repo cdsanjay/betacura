@@ -193,6 +193,14 @@ module.exports = {
                       <td className="head">RelationshipType</td>
                       <td>${employee?.relationshipType}</td>
                     </tr>
+                    ${employee?.gender ? `<tr>
+                      <td className="head">Gender</td>
+                      <td>${employee?.gender}</td>
+                    </tr>` : "" }
+                   ${employee?.age ?  `<tr>
+                      <td className="head">Age</td>
+                      <td>${employee?.age}</td>
+                    </tr>` : ""}
                     <tr>
                       <td className="head">Address</td>
                       <td>
@@ -216,6 +224,10 @@ module.exports = {
                            <tr>
                             <td className="head">Landmark</td>
                             <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.appointment?.landmark || "N/A"}</td>
+                          </tr>
+                           <tr>
+                            <td className="head">Zip Code</td>
+                            <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.appointment?.zipCode || "N/A"}</td>
                           </tr>
                         </table>
                     </td>
