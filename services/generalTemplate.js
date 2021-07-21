@@ -1,10 +1,10 @@
 const getTemplate = require('./partialTemplate');
 
 module.exports = {
-  generic: {
-    subject: (subject) => subject || 'Betacura',
-    html: (body) => {
-        return `<html>
+    generic: {
+        subject: (subject) => subject || 'Betacura',
+        html: (body) => {
+            return `<html>
         <head>
           <meta charSet="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -175,7 +175,7 @@ module.exports = {
               <td>
                 <!-- first details -->
                 ${body?.packageDetails?.map((employee, index) => {
-                  return `<table>
+                return `<table>
 
                     <tr>
                       <td className="head">Name</td>
@@ -193,6 +193,14 @@ module.exports = {
                       <td className="head">RelationshipType</td>
                       <td>${employee?.relationshipType}</td>
                     </tr>
+                    ${employee?.gender ? `<tr>
+                      <td className="head">Gender</td>
+                      <td>${employee?.gender}</td>
+                    </tr>` : "" }
+                   ${employee?.age ?  `<tr>
+                      <td className="head">Age</td>
+                      <td>${employee?.age}</td>
+                    </tr>` : ""}
                     <tr>
                       <td className="head">Address</td>
                       <td>
@@ -217,6 +225,10 @@ module.exports = {
                             <td className="head">Landmark</td>
                             <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.appointment?.landmark || "N/A"}</td>
                           </tr>
+                           <tr>
+                            <td className="head">Zip Code</td>
+                            <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.appointment?.zipCode || "N/A"}</td>
+                          </tr>
                         </table>
                     </td>
                     </tr>
@@ -239,14 +251,14 @@ module.exports = {
                             <!-- table -->
                             <td>
                                 ${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.packages?.addOnPackages?.map((addon, index) => {
-                                  return `<table>
+                    return `<table>
                                 <tr>
                                    <td>${index+1}</td>
                                   <td className="head">${addon?.name}</td>
                                   <td className="head">${addon?.price}</td>
                                 </tr>
                               </table>`
-                  })}
+                })}
                             </td>
                             <!-- table end -->
                           </tr>
@@ -254,7 +266,7 @@ module.exports = {
                       </td>
                     </tr>
                   </table>`
-        })}
+            })}
               </td>
 
 
@@ -275,6 +287,6 @@ module.exports = {
         </body>
         </html>`
 
+        },
     },
-  },
 };
