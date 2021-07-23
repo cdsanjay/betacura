@@ -9,23 +9,33 @@ const defaultValues = {
   email1: 'idsanjay81@gmail.com',
 }
 export default function EmployeeDetails(props){
-  const [familyNumber, setFamilyNumber] = useState(0);
   const { values, setValues, handleStep, family, setFamily } = props
+  const defaultValues = {
+    name1:values.employeeDetails[0]?.name,
+    id:values.employeeDetails[0]?.id,
+    idprooftype:values.employeeDetails[0]?.idprooftype,
+    idproof:values.employeeDetails[0]?.idproof,
+    phone1:values.employeeDetails[0]?.phone,
+    email1:values.employeeDetails[0]?.email,
+    age1:values.employeeDetails[0]?.age,
+    gender1:values.employeeDetails[0]?.gender,
+    family: [],
+  };
+  values?.employeeDetails?.map((value, index) => {
+    if(index === 0) return ;
+    const familyDetail = {
+      name:value.name,
+      phone:value.phone,
+      email:value.email,
+      age:value.age,
+      gender:value.gender,
+    };
+    defaultValues.family.push(familyDetail);
+  })
+
     const { register, handleSubmit, errors, control } = useForm({
       // TODO Remove this ||
-      defaultValues: {
-        name1:values.employeeDetails[0]?.name,
-        id:values.employeeDetails[0]?.id,
-        idprooftype:values.employeeDetails[0]?.idprooftype,
-        idproof:values.employeeDetails[0]?.idproof,
-        phone1:values.employeeDetails[0]?.phone,
-        email1:values.employeeDetails[0]?.email,
-        name2:values.employeeDetails[1]?.name,
-        gender:values.employeeDetails[1]?.gender,
-        age:values.employeeDetails[1]?.age,
-        email2:values.employeeDetails[1]?.email,
-        phone2:values.employeeDetails[1]?.phone,
-      }
+      defaultValues
     });
   const { fields, remove, append } = useFieldArray({
     control,
@@ -51,7 +61,7 @@ export default function EmployeeDetails(props){
             if(!responseData?.isValid){
               return NotificationManager.error(responseData?.message);
             }
-          var emp1 = {name:data.name1,id:data.id,idprooftype:data.idprooftype,idproof:data.idproof,phone:data.phone1,email:data.email1}
+          var emp1 = {age: data.age1, gender: data.gender1, name:data.name1,id:data.id,idprooftype:data.idprooftype,idproof:data.idproof,phone:data.phone1,email:data.email1}
 
           // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
           setValues({...values,employeeDetails:family ? [emp1,...data?.family] : [emp1] })
@@ -157,6 +167,20 @@ export default function EmployeeDetails(props){
             <input type="text" name="name1" ref={register({required:true})}
             className="border p-2 w-full" placeholder="Your Full Name" />
             {errors.name1 && <small className="text-danger">Employee name is required</small>}
+          </div>
+          <div className="col-md-4">
+            <div className="py-2 text-dark font-medium">Gender *</div>
+            <select name={`gender1`} className="form-select" ref={register({required:true})} >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            {errors?.gender1 && <small className="text-danger">Gender is required</small>}
+          </div>
+          <div className="col-md-4">
+            <div className="py-2 text-dark font-medium">Age *</div>
+            <input type="number" name={`age1`} ref={register({required:true})}
+                   className="border p-2 w-full" placeholder="Enter your age" />
+            {errors?.age1 && <small className="text-danger">Age is required</small>}
           </div>
           <div className="col-md-4">
             <div className="py-2 text-dark font-medium">Employee Id *</div>

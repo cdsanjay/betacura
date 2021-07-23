@@ -224,11 +224,11 @@ export default function AppointmentDetails(props) {
             </div>
 
             <div className="col-md-4 my-1">
-              <div className="py-2 text-dark font-medium">ZipCode</div>
+              <div className="py-2 text-dark font-medium">ZipCode *</div>
               <input
                   type="text"
                   name="zipCode1"
-                  ref={register}
+                  ref={register({ required: true })}
                   className="form-control"
                   placeholder="Zip Code"
               />
@@ -422,11 +422,11 @@ export default function AppointmentDetails(props) {
                         </div>
 
                         <div className="col-md-4 my-1">
-                          <div className="py-2 text-dark font-medium">ZipCode</div>
+                          <div className="py-2 text-dark font-medium">ZipCode *</div>
                           <input
                               type="text"
                               name={`zipCode2_${index}`}
-                              ref={register}
+                              ref={register({ required: true })}
                               className="form-control"
                               placeholder="Zip Code"
                           />
