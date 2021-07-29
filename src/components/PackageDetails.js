@@ -349,7 +349,7 @@ export default function PackageDetails(props) {
   );
 
 
-  const hcc = 250;
+  const hcc = parseFloat(process.env.DELIVERY_FEE);
 
   const [charge, setCharge] = React.useState(false);
 
@@ -430,7 +430,7 @@ export default function PackageDetails(props) {
     //   var calc2 = price3 + price4 + pkgprice;
     //   setPrice2(calc2);
     // }
-    setCharge(totalCalcPrice>parseInt())
+    setCharge(totalCalcPrice < parseFloat(process.env.REACT_APP_FREE_DELIERY_UPTO));
     // if (family) {
     //   setCharge(
     //       (addons1?.length > 0 || addons2?.length > 0) &&
