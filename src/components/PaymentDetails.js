@@ -16,7 +16,7 @@ export default function PaymentDetails(props) {
           : 0
       : 0;
 
-  const hcc = 250;
+  const hcc = parseFloat(process.env.DELIVERY_FEE);
 
   useEffect(() => {
     let total = 0;
