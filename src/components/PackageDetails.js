@@ -407,9 +407,10 @@ export default function PackageDetails(props) {
     });
     setAddonPrice1(price1);
     setCustomizePrice1(price2);
+    let totalCalcPrice = price1;
     if (price2 > discountForEmployee) {
-      var calc1 = price1 + price2 - discountForEmployee;
-      setPrice1(calc1);
+      totalCalcPrice = price1 + price2 - discountForEmployee;
+      setPrice1(totalCalcPrice);
     } else {
       setPrice1(price1);
     }
@@ -429,16 +430,16 @@ export default function PackageDetails(props) {
     //   var calc2 = price3 + price4 + pkgprice;
     //   setPrice2(calc2);
     // }
-
-    if (family) {
-      setCharge(
-          (addons1?.length > 0 || addons2?.length > 0) &&
-          selPkg1 === "" &&
-          selPkg2 === ""
-      );
-    } else {
-      setCharge(addons1?.length > 0 && selPkg1 === "");
-    }
+    setCharge(totalCalcPrice>parseInt())
+    // if (family) {
+    //   setCharge(
+    //       (addons1?.length > 0 || addons2?.length > 0) &&
+    //       selPkg1 === "" &&
+    //       selPkg2 === ""
+    //   );
+    // } else {
+    //   setCharge(addons1?.length > 0 && selPkg1 === "");
+    // }
   };
 
   const onSubmit = (data) => {

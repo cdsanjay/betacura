@@ -189,8 +189,10 @@ export default function EmployeeDetails(props){
             {errors.id && <small className="text-danger">Employee ID is required</small>}
           </div>
           <div className="col-md-4">
-            <div className="py-2 text-dark font-medium">Employee Id proof *</div>
-            <select name="idprooftype" className="form-select" ref={register({required:true})} defaultValue={idproof} onChange={(e)=>{setIdproof(e.target.value)}} >
+            <div className="py-2 text-dark font-medium">Employee Id proof</div>
+            <select name="idprooftype" className="form-select"
+                    // ref={register({required:true})}
+                    defaultValue={idproof} onChange={(e)=>{setIdproof(e.target.value)}} >
               <option value="">- Select -</option>
               <option value="Aadhar Card">Aadhar Card</option>
               <option value="Pan Card">Pan Card</option>
