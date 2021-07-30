@@ -48,7 +48,7 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
     setCustomizePrice2(price4);
     const calc2 = price3 + price4 + pkgprice;
     setPrice2(calc2);
-    setFamilyPriceIndex(index, calc2);
+    setFamilyPriceIndex(index, calc2, addons2?.length > 0);
     const addonPackages2 = addons2?.map((e) => ({
       name: addons[Number(e)].value,
       price: addons[Number(e)].price,
@@ -295,15 +295,23 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
 }
 
 export default function PackageDetails(props) {
+
+  const [isAddonSelectedEmployee, setIsAddonSelectedEmployee] = React.useState(false);
+  const [isAddonSelectedFamily, setIsAddonSelectedFamily] = React.useState([]);
+
   const discountForEmployee = parseFloat(process.env.REACT_APP_EMPLOYEE_DISCOUNT);
   const [customizePrice1, setCustomizePrice1] = React.useState(0);
   const [familyPackages, setFamilyPackages] = React.useState([]);
   const [familyPrice, setFamilyPrice] = React.useState([]);
 
-  const setFamilyPriceIndex = (index, price) => {
+  const setFamilyPriceIndex = (index, price, isAddonSelected) => {
     const familyPriceTemp = [...familyPrice];
+    const addonFamily = [...isAddonSelectedFamily];
+    addonFamily.splice(index, 1, !!isAddonSelected);
     familyPriceTemp.splice(index, 1, price || 0);
+    setIsAddonSelectedFamily(addonFamily);
     setFamilyPrice(familyPriceTemp)
+
   }
 
   const setFamilyPkgIndex = (index, pkg) => {
@@ -316,6 +324,7 @@ export default function PackageDetails(props) {
     if(values && values.employeeDetails && values.employeeDetails.length > 1){
       setFamilyPrice(new Array(values.employeeDetails.length - 1).fill(0))
       setFamilyPackages(new Array(values.employeeDetails.length - 1).fill({}))
+      setFamilyPackages(new Array(values.employeeDetails.length - 1).fill(false));
     }
   }, [values]);
 
@@ -349,7 +358,7 @@ export default function PackageDetails(props) {
   );
 
 
-  const hcc = parseFloat(process.env.DELIVERY_FEE);
+  const hcc = parseFloat(process.env.REACT_APP_DELIVERY_FEE);
 
   const [charge, setCharge] = React.useState(false);
 
@@ -396,6 +405,7 @@ export default function PackageDetails(props) {
     const addons1 = getValues("addons1");
     const customizePackage1 = getValues("customizePackage1");
     const addons2 = getValues("addons2");
+
     const customizePackage2 = getValues("customizePackage2");
     var price1 = 0,
         price2 = 0;
@@ -430,15 +440,16 @@ export default function PackageDetails(props) {
     //   var calc2 = price3 + price4 + pkgprice;
     //   setPrice2(calc2);
     // }
-    setCharge(totalCalcPrice < parseFloat(process.env.REACT_APP_FREE_DELIERY_UPTO));
+    // setCharge(totalCalcPrice < parseFloat(process.env.REACT_APP_FREE_DELIERY_UPTO));
+    setIsAddonSelectedEmployee(addons1?.length > 0);
     // if (family) {
     //   setCharge(
-    //       (addons1?.length > 0 || addons2?.length > 0) &&
-    //       selPkg1 === "" &&
-    //       selPkg2 === ""
+    //       totalCalcPrice < parseFloat(process.env.REACT_APP_FREE_DELIERY_UPTO) &&
+    //       (addons1?.length > 0 || addons2?.length > 0)
     //   );
     // } else {
-    //   setCharge(addons1?.length > 0 && selPkg1 === "");
+    //   setCharge(totalCalcPrice < parseFloat(process.env.REACT_APP_FREE_DELIERY_UPTO) &&
+    //       addons1?.length > 0);
     // }
   };
 
@@ -516,6 +527,20 @@ export default function PackageDetails(props) {
     });
     handleStep();
   };
+
+  useEffect(() => {
+    const totalPrice = totalPrice1 + familyPrice.reduce((acc, curr) => acc + curr, 0);
+    if(totalPrice > 0 && totalPrice < 500) {
+      const isAddonSelected = isAddonSelectedEmployee || isAddonSelectedFamily.includes(true);
+      if(isAddonSelected) {
+        return setCharge(true);
+      }
+    }
+    setCharge(false);
+    console.log('charge totalPrice', totalPrice1, familyPrice, isAddonSelectedEmployee, isAddonSelectedFamily);
+
+  }, [totalPrice1, familyPrice, isAddonSelectedEmployee, isAddonSelectedFamily]);
+  console.log('charge', charge);
   return (
       <div className="container-fluid p-4 bg-white border shadow-sm">
         <form onSubmit={handleSubmit(onSubmit)}>
