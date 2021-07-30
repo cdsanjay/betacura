@@ -16,7 +16,7 @@ export default function PaymentDetails(props) {
           : 0
       : 0;
 
-  const hcc = parseFloat(process.env.DELIVERY_FEE);
+  const hcc = parseFloat(process.env.REACT_APP_DELIVERY_FEE);
 
   useEffect(() => {
     let total = 0;
@@ -86,7 +86,7 @@ export default function PaymentDetails(props) {
                         </div>
 
                         {values?.packageDetails[index]?.customized &&
-                        values.packageDetails[index]?.customizePackage.length > 0 ? (
+                        values.packageDetails[index]?.customizePackage?.length > 0 ? (
                             <>
                               <div className="mx-auto flex items-center">
                                 <div className="w-3/6 md:w-4/6 flex items-center my-2">

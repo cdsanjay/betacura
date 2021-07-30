@@ -82,6 +82,7 @@ function App() {
       identificationType:values.employeeDetails[0].idprooftype,
       identificationDocUrl:ImageUrl,
       mobile:values.employeeDetails[0].phone,
+      name:values.employeeDetails[0].name,
       packageDetails:pkg,
       totalConvienceCharge:0,
       paymentMode:payment,
@@ -90,53 +91,48 @@ function App() {
 
     // setStep(step+1)
 
-    // console.log(values.employeeDetails[0].idproof)
-    var formData = new FormData();
-    formData.append("type","BCuraLead")
-    formData.append("file",values.employeeDetails[0].idproof[0])
-    formData.append("fileName",values.employeeDetails[0].idproof[0].name)
-    formData.append("mediaType","image")
-    console.log(formData)
-    const serverOrigin ='https://reachlocalads.com';
-    //const serverOrigin ='http://13.233.125.97:8080';
-    fetch(serverOrigin+"/upload/ext/file",{
-      method: 'POST',
-      body: formData,
-    }).then(async d=>await d.json()).then(json=>{
-      setImageUrl(json.url);
-      data.idProofURL = json;
-      console.log(json);
-      // after image saved.. proceed for payment
-    }).catch(err=>{
-      console.log(err)
-    }).finally(()=>{
-      // TODO 1. mail the data
-
-      // TODO 2. handle the payment
+    console.log(values.employeeDetails[0].idproof)
+    if(values.employeeDetails[0]?.idproof && values.employeeDetails[0]?.idproof[0]) {
+      var formData = new FormData();
+      formData.append("type","BCuraLead")
+      formData.append("file",values.employeeDetails[0].idproof[0])
+      formData.append("fileName",values.employeeDetails[0].idproof[0].name)
+      formData.append("mediaType","image")
+      console.log(formData)
+      const serverOrigin ='https://reachlocalads.com';
+      //const serverOrigin ='http://13.233.125.97:8080';
+      fetch(serverOrigin+"/upload/ext/file",{
+        method: 'POST',
+        body: formData,
+      }).then(async d=>await d.json()).then(json=>{
+        setImageUrl(json.url);
+        data.idProofURL = json;
+        console.log(json);
+        // after image saved.. proceed for payment
+      }).catch(err=>{
+        console.log(err)
+      }).finally(()=>{
+        // handle the payment and mail the response
+        if(payment === 'ONLINE'){
+          displayRazorpay(total, data, payment);
+        }
+        else if(payment === "CASH"){
+          emailTheResponse(total, data, payment)
+        }
+      })
+    }else {
+      // if no image then also do what ever neeed to do
+      // handle the payment and mail the response
       if(payment === 'ONLINE'){
         displayRazorpay(total, data, payment);
       }
       else if(payment === "CASH"){
         emailTheResponse(total, data, payment)
       }
-    })
+    }
 
-    // console.log(data)
-    // fetch(`${serverOrigin}/incoming-lead/receive/w/appointment`,{
-    //   method:"POST",
-    //   body:JSON.stringify(data),
-    //   headers: {
-    //     "Accept":"application/json",
-    //     "Content-Type":"application/json",
-    //   },
-    // })
-    // .then(d=>d.json())
-    // .then(json=>{
-    //   console.log(json)
-    //   setPaymentUrl(json.paymentUrl)
-    // }).catch(err=>{
-    //   console.log(err)
-    // })
+
+
 
 
   }
@@ -201,11 +197,11 @@ function App() {
         // alert(response.razorpay_order_id)
         // alert(response.razorpay_signature)
       },
-      // prefill: {
-      //   name,
-      //   email: 'sdfdsjfh2@ndsfdf.com',
-      //   phone_number: '9899999999'
-      // }
+      prefill: {
+        name: appointmentData?.name,
+        email: appointmentData?.email,
+        phone_number: appointmentData?.mobile
+      }
     }
     const paymentObject = new window.Razorpay(options)
     paymentObject.open()

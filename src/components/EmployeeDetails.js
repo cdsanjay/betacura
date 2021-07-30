@@ -62,12 +62,13 @@ export default function EmployeeDetails(props){
               return NotificationManager.error(responseData?.message);
             }
             var emp1 = {age: data.age1, gender: data.gender1, name:data.name1,id:data.id,idprooftype:data.idprooftype,idproof:data.idproof,phone:data.phone1,email:data.email1}
-
+            console.log('emp',family,  data?.family)
             // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
-            setValues({...values,employeeDetails:family ? [emp1,...data?.family] : [emp1] })
+            setValues({...values,employeeDetails:family ? [emp1,...data?.family || []] : [emp1] })
             handleStep();
           }
-      ).catch(()=>{
+      ).catch((error)=>{
+        console.log('employee detail error',error);
         NotificationManager.error('Error processing your request! Server is offline');
 
       })
