@@ -12,7 +12,7 @@ const employees = require('../backend/model/Employee');
 
 const employeeIds = employees?.map(employee => employee['employeeID']?.toString());
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.post('/validate/', jsonParser,
     async (req, res) => {
