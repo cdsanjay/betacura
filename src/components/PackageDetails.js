@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {addons, customizePackageList, packages} from "./globalVar";
+import {addons, customizePackageList, packages, familyPackage} from "./globalVar";
 
 const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, values, index, register, getValues}) => {
 
@@ -13,8 +13,8 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
       values?.packageDetails[index] ? values.packageDetails[index]?.category : ""
   );
   const packageList = [
-    ...packages,
-    { name: "Customize Package", price: customizePrice2, count: 0, data: [] },
+    ...familyPackage,
+    // { name: "Customize Package", price: customizePrice2, count: 0, data: [] },
   ];
   const [selectedPackage, setSelectedPackage] = React.useState(
       String(
@@ -102,7 +102,7 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
       >
         <option value="">- Select -</option>
         <option value="0">Packages</option>
-        <option value="1">Addons</option>
+        {/*<option value="1">Addons</option>*/}
       </select>
 
       {category === "0" ? (
@@ -145,151 +145,151 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
                     <></>
                 )}
               </div>
-              <div
-                  className={
-                    selectedPackage === "2" ? "block" : "hidden"
-                  }
-              >
-                <div className="accordion my-2" id="accordionExample">
-                  <div className="accordion-item">
-                    <h2
-                        className="accordion-header"
-                        onClick={(e) => setCustomizeBar2(!customizeBar2)}
-                    >
-                      <button
-                          className={
-                            customizeBar2
-                                ? "accordion-button"
-                                : "accordion-button collapsed"
-                          }
-                          type="button"
-                      >
-                        Customize Package{" "}
-                        <span className="text-sm md:text-lg font-medium text-dark px-2">
-                                  {" "}
-                          (Rs. {customizePrice2} )
-                                </span>
-                      </button>
-                    </h2>
-                    <div
-                        className={
-                          customizeBar2
-                              ? "accordion-collapse"
-                              : "accordion-collapse collapse"
-                        }
-                    >
-                      <div className="accordion-body">
-                        <div className="">
-                          <div className="w-full">
-                            {customizePackageList.map((el, key) => (
-                                <div
-                                    key={key}
-                                    className="flex items-start justify-between mr-1"
-                                >
-                                  <div className="flex items-start w-4/6">
-                                    <input
-                                        type="checkbox"
-                                        className="m-2 ml-0"
-                                        defaultValue={key}
-                                        onChange={handleChange}
-                                        name={`customizePackage2_${index}`}
-                                        ref={register}
-                                    />
-                                    <div>
-                                      <div className="text-lg font-medium mx-2">
-                                        {el.value}{" "}
-                                      </div>
-                                      {el.sub.map((e, k) => (
-                                          <div className="px-2" key={k}>
-                                            {e}
-                                          </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                  <div>Rs. {el.price} </div>
-                                </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/*<div*/}
+              {/*    className={*/}
+              {/*      selectedPackage === "2" ? "block" : "hidden"*/}
+              {/*    }*/}
+              {/*>*/}
+              {/*  <div className="accordion my-2" id="accordionExample">*/}
+              {/*    <div className="accordion-item">*/}
+              {/*      <h2*/}
+              {/*          className="accordion-header"*/}
+              {/*          onClick={(e) => setCustomizeBar2(!customizeBar2)}*/}
+              {/*      >*/}
+              {/*        <button*/}
+              {/*            className={*/}
+              {/*              customizeBar2*/}
+              {/*                  ? "accordion-button"*/}
+              {/*                  : "accordion-button collapsed"*/}
+              {/*            }*/}
+              {/*            type="button"*/}
+              {/*        >*/}
+              {/*          Customize Package{" "}*/}
+              {/*          <span className="text-sm md:text-lg font-medium text-dark px-2">*/}
+              {/*                    {" "}*/}
+              {/*            (Rs. {customizePrice2} )*/}
+              {/*                  </span>*/}
+              {/*        </button>*/}
+              {/*      </h2>*/}
+              {/*      <div*/}
+              {/*          className={*/}
+              {/*            customizeBar2*/}
+              {/*                ? "accordion-collapse"*/}
+              {/*                : "accordion-collapse collapse"*/}
+              {/*          }*/}
+              {/*      >*/}
+              {/*        <div className="accordion-body">*/}
+              {/*          <div className="">*/}
+              {/*            <div className="w-full">*/}
+              {/*              {customizePackageList.map((el, key) => (*/}
+              {/*                  <div*/}
+              {/*                      key={key}*/}
+              {/*                      className="flex items-start justify-between mr-1"*/}
+              {/*                  >*/}
+              {/*                    <div className="flex items-start w-4/6">*/}
+              {/*                      <input*/}
+              {/*                          type="checkbox"*/}
+              {/*                          className="m-2 ml-0"*/}
+              {/*                          defaultValue={key}*/}
+              {/*                          onChange={handleChange}*/}
+              {/*                          name={`customizePackage2_${index}`}*/}
+              {/*                          ref={register}*/}
+              {/*                      />*/}
+              {/*                      <div>*/}
+              {/*                        <div className="text-lg font-medium mx-2">*/}
+              {/*                          {el.value}{" "}*/}
+              {/*                        </div>*/}
+              {/*                        {el.sub.map((e, k) => (*/}
+              {/*                            <div className="px-2" key={k}>*/}
+              {/*                              {e}*/}
+              {/*                            </div>*/}
+              {/*                        ))}*/}
+              {/*                      </div>*/}
+              {/*                    </div>*/}
+              {/*                    <div>Rs. {el.price} </div>*/}
+              {/*                  </div>*/}
+              {/*              ))}*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
             </div>
           </>
       ) : (
           <></>
       )}
 
-      {category === "" ? (
-          <></>
-      ) : (
-          <>
-            <div>
-              <div className="accordion my-2" id="accordionExample">
-                <div className="accordion-item">
-                  <h2
-                      className="accordion-header"
-                      onClick={(e) => setAddonbar2(!addonbar2)}
-                  >
-                    <button
-                        className={
-                          addonbar2
-                              ? "accordion-button"
-                              : "accordion-button collapsed"
-                        }
-                        type="button"
-                    >
-                      Add-on Tests{" "}
-                      <span className="text-sm md:text-lg font-medium text-dark px-2">
-                                {" "}
-                        (Rs. {addonPrice2})
-                              </span>
-                    </button>
-                  </h2>
-                  <div
-                      className={
-                        addonbar2
-                            ? "accordion-collapse"
-                            : "accordion-collapse collapse"
-                      }
-                  >
-                    <div className="accordion-body">
-                      <div className="">
-                        <div className="w-full">
-                          {addons.map((el, key) => (
-                              <div
-                                  key={key}
-                                  className="flex items-start justify-between mr-1"
-                              >
-                                <div className="flex items-start w-4/6">
-                                  <input
-                                      type="checkbox"
-                                      className="m-2 ml-0"
-                                      defaultValue={key}
-                                      onChange={handleChange}
-                                      name={`addons2_${index}`}
-                                      ref={register}
-                                  />
-                                  <div>
-                                    <div className="text-lg font-medium mx-2">
-                                      {el.value}{" "}
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>Rs. {el.price} </div>
-                              </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-      )}
+      {/*{category === "" ? (*/}
+      {/*    <></>*/}
+      {/*) : (*/}
+      {/*    <>*/}
+      {/*      <div>*/}
+      {/*        <div className="accordion my-2" id="accordionExample">*/}
+      {/*          <div className="accordion-item">*/}
+      {/*            <h2*/}
+      {/*                className="accordion-header"*/}
+      {/*                onClick={(e) => setAddonbar2(!addonbar2)}*/}
+      {/*            >*/}
+      {/*              <button*/}
+      {/*                  className={*/}
+      {/*                    addonbar2*/}
+      {/*                        ? "accordion-button"*/}
+      {/*                        : "accordion-button collapsed"*/}
+      {/*                  }*/}
+      {/*                  type="button"*/}
+      {/*              >*/}
+      {/*                Add-on Tests{" "}*/}
+      {/*                <span className="text-sm md:text-lg font-medium text-dark px-2">*/}
+      {/*                          {" "}*/}
+      {/*                  (Rs. {addonPrice2})*/}
+      {/*                        </span>*/}
+      {/*              </button>*/}
+      {/*            </h2>*/}
+      {/*            <div*/}
+      {/*                className={*/}
+      {/*                  addonbar2*/}
+      {/*                      ? "accordion-collapse"*/}
+      {/*                      : "accordion-collapse collapse"*/}
+      {/*                }*/}
+      {/*            >*/}
+      {/*              <div className="accordion-body">*/}
+      {/*                <div className="">*/}
+      {/*                  <div className="w-full">*/}
+      {/*                    {addons.map((el, key) => (*/}
+      {/*                        <div*/}
+      {/*                            key={key}*/}
+      {/*                            className="flex items-start justify-between mr-1"*/}
+      {/*                        >*/}
+      {/*                          <div className="flex items-start w-4/6">*/}
+      {/*                            <input*/}
+      {/*                                type="checkbox"*/}
+      {/*                                className="m-2 ml-0"*/}
+      {/*                                defaultValue={key}*/}
+      {/*                                onChange={handleChange}*/}
+      {/*                                name={`addons2_${index}`}*/}
+      {/*                                ref={register}*/}
+      {/*                            />*/}
+      {/*                            <div>*/}
+      {/*                              <div className="text-lg font-medium mx-2">*/}
+      {/*                                {el.value}{" "}*/}
+      {/*                              </div>*/}
+      {/*                            </div>*/}
+      {/*                          </div>*/}
+      {/*                          <div>Rs. {el.price} </div>*/}
+      {/*                        </div>*/}
+      {/*                    ))}*/}
+      {/*                  </div>*/}
+      {/*                </div>*/}
+      {/*              </div>*/}
+      {/*            </div>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </>*/}
+      {/*)}*/}
     </div>
   </>
 }
@@ -340,7 +340,7 @@ export default function PackageDetails(props) {
   );
 
   const packageList = [...packages,
-    { name: "Customize Package", price: customizePrice1, count: 0, data: [] },
+    // { name: "Customize Package", price: customizePrice1, count: 0, data: [] },
   ];
 
   const [selectedPackage1, setSelectedPackage1] = React.useState(
@@ -566,8 +566,8 @@ export default function PackageDetails(props) {
                   onChange={(e) => setCategory1(e.target.value)}
               >
                 <option value="">- Select -</option>
-                <option value="0">Corporate Sponsored</option>
-                <option value="1">Addons</option>
+                <option value="0">Platinum - Corporate Sponsored</option>
+                {/*<option value="1">Addons</option>*/}
               </select>
               {category1 === "0" ? (
                   <>
@@ -613,162 +613,162 @@ export default function PackageDetails(props) {
                             <></>
                         )}
                       </div>
-                      <div
-                          className={selectedPackage1 === "1" ? "block" : "hidden"}
-                      >
-                        <div className="accordion my-2" id="accordionExample">
-                          <div className="accordion-item">
-                            <h2
-                                className="accordion-header"
-                                onClick={(e) => setCustomizeBar1(!customizeBar1)}
-                            >
-                              <button
-                                  className={
-                                    customizeBar1
-                                        ? "accordion-button"
-                                        : "accordion-button collapsed"
-                                  }
-                                  type="button"
-                              >
-                                Customize Package{" "}
-                                <span className="text-sm md:text-lg font-medium text-dark px-2">
-                              {" "}
-                                  (Rs.{" "}
-                                  {customizePrice1 < discountForEmployee ? (
-                                      <s> {customizePrice1} </s>
-                                  ) : (
-                                      <>
-                                        {" "}
-                                        {customizePrice1} - {discountForEmployee} ={" "}
-                                        {customizePrice1 - discountForEmployee}{" "}
-                                      </>
-                                  )}{" "}
-                                  )
-                            </span>
-                              </button>
-                            </h2>
-                            <div
-                                className={
-                                  customizeBar1
-                                      ? "accordion-collapse"
-                                      : "accordion-collapse collapse"
-                                }
-                            >
-                              <div className="accordion-body">
-                                <div className="">
-                                  <div className="w-full">
-                                    {customizePackageList.map((el, key) => (
-                                        <div
-                                            key={key}
-                                            className="flex items-start justify-between mr-1"
-                                        >
-                                          <div className="flex items-start w-4/6">
-                                            <input
-                                                type="checkbox"
-                                                className="m-2 ml-0"
-                                                defaultValue={key}
-                                                onChange={handleChange}
-                                                name="customizePackage1"
-                                                ref={register}
-                                            />
-                                            <div>
-                                              <div className="text-lg font-medium mx-2">
-                                                {el.value}{" "}
-                                              </div>
-                                              {el.sub.map((e, k) => (
-                                                  <div className="px-2" key={k}>
-                                                    {e}
-                                                  </div>
-                                              ))}
-                                            </div>
-                                          </div>
-                                          <div>Rs. {el.price} </div>
-                                        </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      {/*<div*/}
+                      {/*    className={selectedPackage1 === "1" ? "block" : "hidden"}*/}
+                      {/*>*/}
+                      {/*  <div className="accordion my-2" id="accordionExample">*/}
+                      {/*    <div className="accordion-item">*/}
+                      {/*      <h2*/}
+                      {/*          className="accordion-header"*/}
+                      {/*          onClick={(e) => setCustomizeBar1(!customizeBar1)}*/}
+                      {/*      >*/}
+                      {/*        <button*/}
+                      {/*            className={*/}
+                      {/*              customizeBar1*/}
+                      {/*                  ? "accordion-button"*/}
+                      {/*                  : "accordion-button collapsed"*/}
+                      {/*            }*/}
+                      {/*            type="button"*/}
+                      {/*        >*/}
+                      {/*          Customize Package{" "}*/}
+                      {/*          <span className="text-sm md:text-lg font-medium text-dark px-2">*/}
+                      {/*        {" "}*/}
+                      {/*            (Rs.{" "}*/}
+                      {/*            {customizePrice1 < discountForEmployee ? (*/}
+                      {/*                <s> {customizePrice1} </s>*/}
+                      {/*            ) : (*/}
+                      {/*                <>*/}
+                      {/*                  {" "}*/}
+                      {/*                  {customizePrice1} - {discountForEmployee} ={" "}*/}
+                      {/*                  {customizePrice1 - discountForEmployee}{" "}*/}
+                      {/*                </>*/}
+                      {/*            )}{" "}*/}
+                      {/*            )*/}
+                      {/*      </span>*/}
+                      {/*        </button>*/}
+                      {/*      </h2>*/}
+                      {/*      <div*/}
+                      {/*          className={*/}
+                      {/*            customizeBar1*/}
+                      {/*                ? "accordion-collapse"*/}
+                      {/*                : "accordion-collapse collapse"*/}
+                      {/*          }*/}
+                      {/*      >*/}
+                      {/*        <div className="accordion-body">*/}
+                      {/*          <div className="">*/}
+                      {/*            <div className="w-full">*/}
+                      {/*              {customizePackageList.map((el, key) => (*/}
+                      {/*                  <div*/}
+                      {/*                      key={key}*/}
+                      {/*                      className="flex items-start justify-between mr-1"*/}
+                      {/*                  >*/}
+                      {/*                    <div className="flex items-start w-4/6">*/}
+                      {/*                      <input*/}
+                      {/*                          type="checkbox"*/}
+                      {/*                          className="m-2 ml-0"*/}
+                      {/*                          defaultValue={key}*/}
+                      {/*                          onChange={handleChange}*/}
+                      {/*                          name="customizePackage1"*/}
+                      {/*                          ref={register}*/}
+                      {/*                      />*/}
+                      {/*                      <div>*/}
+                      {/*                        <div className="text-lg font-medium mx-2">*/}
+                      {/*                          {el.value}{" "}*/}
+                      {/*                        </div>*/}
+                      {/*                        {el.sub.map((e, k) => (*/}
+                      {/*                            <div className="px-2" key={k}>*/}
+                      {/*                              {e}*/}
+                      {/*                            </div>*/}
+                      {/*                        ))}*/}
+                      {/*                      </div>*/}
+                      {/*                    </div>*/}
+                      {/*                    <div>Rs. {el.price} </div>*/}
+                      {/*                  </div>*/}
+                      {/*              ))}*/}
+                      {/*            </div>*/}
+                      {/*          </div>*/}
+                      {/*        </div>*/}
+                      {/*      </div>*/}
+                      {/*    </div>*/}
+                      {/*  </div>*/}
+                      {/*</div>*/}
                     </div>
                   </>
               ) : (
                   <></>
               )}
 
-              {category1 === "" ? (
-                  <></>
-              ) : (
-                  <>
-                    <div>
-                      <div className="accordion my-2" id="accordionExample">
-                        <div className="accordion-item">
-                          <h2
-                              className="accordion-header"
-                              onClick={(e) => setAddonbar1(!addonbar1)}
-                          >
-                            <button
-                                className={
-                                  addonbar1
-                                      ? "accordion-button"
-                                      : "accordion-button collapsed"
-                                }
-                                type="button"
-                            >
-                              Add-on Tests{" "}
-                              <span className="text-sm md:text-lg font-medium text-dark px-2">
-                            {" "}
-                                (Rs. {addonPrice1})
-                          </span>
-                            </button>
-                          </h2>
-                          <div
-                              className={
-                                addonbar1
-                                    ? "accordion-collapse"
-                                    : "accordion-collapse collapse"
-                              }
-                          >
-                            <div className="accordion-body">
-                              <div className="">
-                                <div className="w-full">
-                                  {addons.map((el, key) => (
-                                      <div
-                                          key={key}
-                                          className="flex items-start justify-between mr-1"
-                                      >
-                                        <div className="flex items-start w-4/6">
-                                          <input
-                                              type="checkbox"
-                                              className="m-2 ml-0"
-                                              defaultValue={key}
-                                              onChange={handleChange}
-                                              name="addons1"
-                                              ref={register}
-                                          />
-                                          <div>
-                                            <div
-                                                className="text-lg font-medium mx-2"
-                                                style={{ overflow: "hidden" }}
-                                            >
-                                              {el.value}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div>Rs. {el.price} </div>
-                                      </div>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-              )}
+              {/*{category1 === "" ? (*/}
+              {/*    <></>*/}
+              {/*) : (*/}
+              {/*    <>*/}
+              {/*      <div>*/}
+              {/*        <div className="accordion my-2" id="accordionExample">*/}
+              {/*          <div className="accordion-item">*/}
+              {/*            <h2*/}
+              {/*                className="accordion-header"*/}
+              {/*                onClick={(e) => setAddonbar1(!addonbar1)}*/}
+              {/*            >*/}
+              {/*              <button*/}
+              {/*                  className={*/}
+              {/*                    addonbar1*/}
+              {/*                        ? "accordion-button"*/}
+              {/*                        : "accordion-button collapsed"*/}
+              {/*                  }*/}
+              {/*                  type="button"*/}
+              {/*              >*/}
+              {/*                Add-on Tests{" "}*/}
+              {/*                <span className="text-sm md:text-lg font-medium text-dark px-2">*/}
+              {/*              {" "}*/}
+              {/*                  (Rs. {addonPrice1})*/}
+              {/*            </span>*/}
+              {/*              </button>*/}
+              {/*            </h2>*/}
+              {/*            <div*/}
+              {/*                className={*/}
+              {/*                  addonbar1*/}
+              {/*                      ? "accordion-collapse"*/}
+              {/*                      : "accordion-collapse collapse"*/}
+              {/*                }*/}
+              {/*            >*/}
+              {/*              <div className="accordion-body">*/}
+              {/*                <div className="">*/}
+              {/*                  <div className="w-full">*/}
+              {/*                    {addons.map((el, key) => (*/}
+              {/*                        <div*/}
+              {/*                            key={key}*/}
+              {/*                            className="flex items-start justify-between mr-1"*/}
+              {/*                        >*/}
+              {/*                          <div className="flex items-start w-4/6">*/}
+              {/*                            <input*/}
+              {/*                                type="checkbox"*/}
+              {/*                                className="m-2 ml-0"*/}
+              {/*                                defaultValue={key}*/}
+              {/*                                onChange={handleChange}*/}
+              {/*                                name="addons1"*/}
+              {/*                                ref={register}*/}
+              {/*                            />*/}
+              {/*                            <div>*/}
+              {/*                              <div*/}
+              {/*                                  className="text-lg font-medium mx-2"*/}
+              {/*                                  style={{ overflow: "hidden" }}*/}
+              {/*                              >*/}
+              {/*                                {el.value}{" "}*/}
+              {/*                              </div>*/}
+              {/*                            </div>*/}
+              {/*                          </div>*/}
+              {/*                          <div>Rs. {el.price} </div>*/}
+              {/*                        </div>*/}
+              {/*                    ))}*/}
+              {/*                  </div>*/}
+              {/*                </div>*/}
+              {/*              </div>*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </>*/}
+              {/*)}*/}
             </div>
 
             {/* Package 2 */}

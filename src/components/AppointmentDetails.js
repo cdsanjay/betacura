@@ -171,13 +171,20 @@ export default function AppointmentDetails(props) {
               >
                 <option value="">- Select -</option>
                 <option value="Bangalore">Bangalore</option>
-                <option value="Delhi & NCR">Delhi & NCR</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
                 <option value="Mumbai">Mumbai</option>
-                <option value="Hydrabad">Hydrabad</option>
                 <option value="Kolkata">Kolkata</option>
                 <option value="Pune">Pune</option>
-                <option value="Chennai">Chennai</option>
+                <option value="Delhi">Delhi</option>
                 <option value="Ahemdabad">Ahemdabad</option>
+                <option value="Surat">Surat</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Vizag">Vizag</option>
+                <option value="Vijayawada">Vijayawada</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Guntur">Guntur</option>
+                <option value="Vadodara">Vadodara</option>
               </select>
               {errors.city1?.type === "required" && (
                   <small className="text-danger">City is required</small>
@@ -361,13 +368,20 @@ export default function AppointmentDetails(props) {
                           >
                             <option value="">- Select -</option>
                             <option value="Bangalore">Bangalore</option>
-                            <option value="Delhi & NCR">Delhi & NCR</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
                             <option value="Mumbai">Mumbai</option>
-                            <option value="Hydrabad">Hydrabad</option>
                             <option value="Kolkata">Kolkata</option>
                             <option value="Pune">Pune</option>
-                            <option value="Chennai">Chennai</option>
+                            <option value="Delhi">Delhi</option>
                             <option value="Ahemdabad">Ahemdabad</option>
+                            <option value="Surat">Surat</option>
+                            <option value="Nagpur">Nagpur</option>
+                            <option value="Vizag">Vizag</option>
+                            <option value="Vijayawada">Vijayawada</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Guntur">Guntur</option>
+                            <option value="Vadodara">Vadodara</option>
                           </select>
                           {errors && errors[`city2_${index}`]?.type === "required" && (
                               <small className="text-danger">City is required</small>

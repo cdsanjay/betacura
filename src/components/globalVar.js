@@ -1,34 +1,52 @@
 export const packages = [
     {
-        name: "Package A",
-        price: 1450,
-        count: 29,
+        name: "Package A - Male",
+        price: 4999,
+        count: 31,
         data: [
-            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
+            "Hematology (CBC with ESR, Haemoglobin)",
             "Diabetic Checkup (F.B.S, HBA1C)",
-            "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-            "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-            "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-            "Physician Examination",
-            "Teleconsultation",
+            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDL Ratio, Serum Triglycerides)",
+            "Liver Function Tests (Total Protein, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate)",
+            "Kidney Function Tests (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis)",
+            "Thyroid Profile (T3, T4, TSH)",
+            "Others (ECG, PSA, USG Abdomen & Pelvis)",
+            "Vitamin Profile  (Vitamin - B12 and , Vitamin D-3 (25 - Hydroxy))",
+            "Consultation (dddss, HBA1C)",
+            "Thyroid (Physician Consultation)",
         ],
     },
-    // {
-    //     name: "Package B",
-    //     price: 2000,
-    //     count: 23,
-    //     data: [
-    //         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-    //         "Diabetic Checkup (F.B.S, HBA1C)",
-    //         "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-    //         "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-    //         "Thyroid Profile (T3, T4, TSH)",
-    //         "Radiological Test (ECG)",
-    //         "USG Abdomen",
-    //         "Physician Examination",
-    //         "Teleconsultation",
-    //     ],
-    // },
+    {
+        name: "Package B - Female",
+        price: 4999,
+        count: 31,
+        data: [
+            "Hematology (CBC with ESR, Haemoglobin)",
+            "Diabetic Checkup (F.B.S, HBA1C)",
+            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDL Ratio, Serum Triglycerides)",
+            "Liver Function Tests (Total Protein, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate)",
+            "Kidney Function Tests (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis)",
+            "Thyroid Profile (T3, T4, TSH)",
+            "Others (ECG, PSA, USG Abdomen & Pelvis)",
+            "Vitamin Profile  (Vitamin - B12 and , Vitamin D-3 (25 - Hydroxy))",
+            "Consultation (dddss, HBA1C)",
+            "Thyroid (Physician Consultation)",
+        ],
+    },
+];
+export const familyPackage = [
+    {
+        name: "Dependent Package",
+        price: 1850,
+        count: 29,
+        data: [
+            "PRELIMINARY TEST (CBC with ESR, Urine Routine)",
+            "Diabetic Checkup (F.B.S, HBA1C)",
+            "Kidney Profile (Electrolytes, Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Calcium, Phosphorus)",
+            "LIVER PROFILE (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
+            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDLC Ratio, Serum Triglycerides, TC/ DLC Ratio)",
+        ],
+    },
 ];
 
 export const customizePackageList = [

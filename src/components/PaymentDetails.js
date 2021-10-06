@@ -85,67 +85,67 @@ export default function PaymentDetails(props) {
                           </div>
                         </div>
 
-                        {values?.packageDetails[index]?.customized &&
-                        values.packageDetails[index]?.customizePackage?.length > 0 ? (
-                            <>
-                              <div className="mx-auto flex items-center">
-                                <div className="w-3/6 md:w-4/6 flex items-center my-2">
-                                  <select
-                                      className="form-select font-medium w-3/6"
-                                      aria-readonly="true"
-                                  >
-                                    <option selected={true}>Selected Customize test</option>
-                                    {values.packageDetails[index]?.customizePackage?.map(
-                                        (e, k) => (
-                                            <option value="0" disabled>
-                                              {e}
-                                            </option>
-                                        )
-                                    )}
-                                  </select>
-                                </div>
-                                <div className="w-1/6"></div>
-                                <div className="text-right w-2/6 md:w-1/6"></div>
-                              </div>
-                            </>
-                        ) : (
-                            <></>
-                        )}
+                        {/*{values?.packageDetails[index]?.customized &&*/}
+                        {/*values.packageDetails[index]?.customizePackage?.length > 0 ? (*/}
+                        {/*    <>*/}
+                        {/*      <div className="mx-auto flex items-center">*/}
+                        {/*        <div className="w-3/6 md:w-4/6 flex items-center my-2">*/}
+                        {/*          <select*/}
+                        {/*              className="form-select font-medium w-3/6"*/}
+                        {/*              aria-readonly="true"*/}
+                        {/*          >*/}
+                        {/*            <option selected={true}>Selected Customize test</option>*/}
+                        {/*            {values.packageDetails[index]?.customizePackage?.map(*/}
+                        {/*                (e, k) => (*/}
+                        {/*                    <option value="0" disabled>*/}
+                        {/*                      {e}*/}
+                        {/*                    </option>*/}
+                        {/*                )*/}
+                        {/*            )}*/}
+                        {/*          </select>*/}
+                        {/*        </div>*/}
+                        {/*        <div className="w-1/6"></div>*/}
+                        {/*        <div className="text-right w-2/6 md:w-1/6"></div>*/}
+                        {/*      </div>*/}
+                        {/*    </>*/}
+                        {/*) : (*/}
+                        {/*    <></>*/}
+                        {/*)}*/}
                       </>
                   ) : (
                       <></>
                   )}
 
-                  {values.packageDetails[index].addonsArray.length > 0 ? (
-                      <>
-                        <div className="text-dark font-medium w-3/6 md:w-4/6">
-                          Add on tests
-                        </div>
-                        <div className="mx-auto flex items-center">
-                          <div className="w-3/6 md:w-4/6 flex items-center my-2">
-                            <select
-                                className="form-select font-medium w-3/6"
-                                aria-readonly="true"
-                            >
-                              <option selected={true}>Selected Add on Tests</option>
-                              {values.packageDetails[index]?.addons.map((e, k) => (
-                                  <option value="0" disabled>
-                                    {e}
-                                  </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="w-1/6">
-                            {values.packageDetails[index].addonsArray.length}
-                          </div>
-                          <div className="text-right w-2/6 md:w-1/6">
-                            Rs. {values.packageDetails[index].addonprice}
-                          </div>
-                        </div>
-                      </>
-                  ) : (
-                      <></>
-                  )}
+                  {/*{values.packageDetails[index].addonsArray.length > 0 ? (*/}
+                  {/*    <>*/}
+                  {/*      <div className="text-dark font-medium w-3/6 md:w-4/6">*/}
+                  {/*        Add on tests*/}
+                  {/*      </div>*/}
+                  {/*      <div className="mx-auto flex items-center">*/}
+                  {/*        <div className="w-3/6 md:w-4/6 flex items-center my-2">*/}
+                  {/*          <select*/}
+                  {/*              className="form-select font-medium w-3/6"*/}
+                  {/*              aria-readonly="true"*/}
+                  {/*          >*/}
+                  {/*            <option selected={true}>Selected Add on Tests</option>*/}
+                  {/*            {values.packageDetails[index]?.addons.map((e, k) => (*/}
+                  {/*                <option value="0" disabled>*/}
+                  {/*                  {e}*/}
+                  {/*                </option>*/}
+                  {/*            ))}*/}
+                  {/*          </select>*/}
+                  {/*        </div>*/}
+                  {/*        <div className="w-1/6">*/}
+                  {/*          {values.packageDetails[index].addonsArray.length}*/}
+                  {/*        </div>*/}
+                  {/*        <div className="text-right w-2/6 md:w-1/6">*/}
+                  {/*          Rs. {values.packageDetails[index].addonprice}*/}
+                  {/*        </div>*/}
+                  {/*      </div>*/}
+                  {/*    </>*/}
+                  {/*) : (*/}
+                  {/*    <></>*/}
+                  {/*)}*/}
                   <hr className="my-2" />
                 </div>
             );
