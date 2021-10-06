@@ -4,16 +4,7 @@ export const packages = [
         price: 4999,
         count: 31,
         data: [
-            "Hematology (CBC with ESR, Haemoglobin)",
-            "Diabetic Checkup (F.B.S, HBA1C)",
-            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDL Ratio, Serum Triglycerides)",
-            "Liver Function Tests (Total Protein, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate)",
-            "Kidney Function Tests (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis)",
-            "Thyroid Profile (T3, T4, TSH)",
-            "Others (ECG, PSA, USG Abdomen & Pelvis)",
-            "Vitamin Profile  (Vitamin - B12 and , Vitamin D-3 (25 - Hydroxy))",
-            "Consultation (dddss, HBA1C)",
-            "Thyroid (Physician Consultation)",
+            "Haematology (CBC with ESR, Haemoglobin), Diabetes Profile (Fasting Blood Sugar, HbA1C) , Lipid Profile ( Total cholesterol, HDL Cholesterol , LDL Cholesterol, VLDL Cholesterol, HDL/LDL Ratio, Serum Triglycerides), Liver Function test (Total Protein , Albumin ,Globulin, A/G Ratio, SGOT, SGPT, Direct /Indirect Bilirubin, GGTP, Alkaline Phosphatase), Kidney Function test (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis), Thyroid Profile (T3, T4, TSH), Others (ECG, PSA, USG Abdomen & Pelvis), Vitamin Profile (Vitamin - B12 and Vitamin D-3 (25 - Hydroxy), Consultation (Physician Consultation",
         ],
     },
     {
@@ -21,16 +12,7 @@ export const packages = [
         price: 4999,
         count: 31,
         data: [
-            "Hematology (CBC with ESR, Haemoglobin)",
-            "Diabetic Checkup (F.B.S, HBA1C)",
-            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDL Ratio, Serum Triglycerides)",
-            "Liver Function Tests (Total Protein, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate)",
-            "Kidney Function Tests (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis)",
-            "Thyroid Profile (T3, T4, TSH)",
-            "Others (ECG, PSA, USG Abdomen & Pelvis)",
-            "Vitamin Profile  (Vitamin - B12 and , Vitamin D-3 (25 - Hydroxy))",
-            "Consultation (dddss, HBA1C)",
-            "Thyroid (Physician Consultation)",
+            "Haematology (CBC with ESR, Haemoglobin), Diabetes Profile (Fasting Blood Sugar, HbA1C) , Lipid Profile ( Total cholesterol, HDL Cholesterol , LDL Cholesterol, VLDL Cholesterol, HDL/LDL Ratio, Serum Triglycerides), Liver Function test (Total Protein , Albumin ,Globulin, A/G Ratio, SGOT, SGPT, Direct /Indirect Bilirubin, GGTP, Alkaline Phosphatase), Kidney Function test (Serum Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Routine Urine Analysis), Thyroid Profile (T3, T4, TSH), Others (ECG, CA125, USG Abdomen & Pelvis), Vitamin Profile (Vitamin - B12 and Vitamin D-3 (25 - Hydroxy), Consultation (Physician Consultation)",
         ],
     },
 ];
@@ -40,11 +22,7 @@ export const familyPackage = [
         price: 1850,
         count: 29,
         data: [
-            "PRELIMINARY TEST (CBC with ESR, Urine Routine)",
-            "Diabetic Checkup (F.B.S, HBA1C)",
-            "Kidney Profile (Electrolytes, Creatinine, Bun (Blood Urea Nitrogen), Serum Uric Acid, Calcium, Phosphorus)",
-            "LIVER PROFILE (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, GGTP, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-            "Lipid Profile (Total Cholesterol, HDLC, LDLC, VLDL, LDL/HDLC Ratio, Serum Triglycerides, TC/ DLC Ratio)",
+            "Preliminary Test (Complete Blood Count, ESR, Urine Routine), Diabetes Profile (Fasting Blood Sugar, HbA1C), Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus), Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protein, Albumin, Globulin, Alkaline Phosphate, Gamma G.T), Lipid Profile (Total Cholesterol, S. Triglyceride, HDL Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio), Teleconsultation",
         ],
     },
 ];

@@ -595,7 +595,7 @@ export default function PackageDetails(props) {
                               <span key={k}> {e + ", "} </span>
                           ))}
                         </div>
-                        {selectedPackage1 !== "1" && selectedPackage1 !== "" ? (
+                        {selectedPackage1 !== "" ? (
                             <div className="ml-auto text-right pl-4 font-medium w-full md:w-1/6">
                               <div>
                                 {" "}
