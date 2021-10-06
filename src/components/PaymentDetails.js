@@ -4,6 +4,7 @@ export default function PaymentDetails(props) {
   const { values, family } = props;
   // const [addonbar1,setAddonbar1] = React.useState(false);
   const [totalPrice, setTotalPrice] = React.useState(0);
+  const [ack, setAck] = React.useState(false);
 
   const customized1 = values.packageDetails[0]?.customized;
   const pkgPrice1 = values.packageDetails[0]?.pkgprice;
@@ -153,12 +154,30 @@ export default function PaymentDetails(props) {
 
         </div>
 
+        <div style={{
+          padding: 16
+        }}>
+          <input checked={ack} type="checkbox"  name="id" className="m-lg-2"  onChange={({target: {checked}}) => setAck(checked)} />
+          <span>
+            I understand.
+          </span>
+          <br />
+          <span>
+            Disclaimer:- This is to inform that your health screening reports will be shared with your company Human Resource Team. Please acknowledge this by placing tick on the given box.
+          </span>
+          <br />
+          <br />
+        {ack || <small className="text-danger">Before proceeding, you must agree.</small>}
+        </div>
+
+
+
         <div className="p-4 flex justify-between border bg-primary-200 shadow-sm">
           <div>
             <div className="fond-bold display-6">Total Rs. {totalPrice}</div>
             <div>
               {totalPrice !== 0 && <button
-                  disabled={totalPrice === 0}
+                  disabled={totalPrice === 0 || !ack}
                   onClick={(e) => props.submit("ONLINE", totalPrice)}
                   className="cursor-pointer p-2 px-3 bg-success text-white text-center  mt-3"
               >
@@ -170,8 +189,9 @@ export default function PaymentDetails(props) {
             {totalPrice !== 0 && <div className="fond-bold display-6">Pay by</div>}
             <div>
               <button
+                  disabled={!ack}
                   onClick={(e) => props.submit("CASH", totalPrice)}
-                  className="cursor-pointer p-2 px-3 bg-success text-white text-center  mt-3"
+                  className={`cursor-pointer p-2 px-3 ${ack ? "bg-success" : "bg-secondary"} text-white text-center  mt-3`}
               >
                 {totalPrice=== 0 ? "Submit" : "Cash"}
               </button>
