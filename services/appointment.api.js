@@ -118,7 +118,7 @@ router.put(
                 })
             }
             // create
-            const hashResponse = await generateOTP(email);
+            const hashResponse = await generateOTP(email) ;
             if (hashResponse.success) {
                 return res.json(formatAPI(`OTP is sent to ${email} email `, {
                     hash: hashResponse.data,
@@ -149,7 +149,7 @@ router.put('/validate-pin',
         const { otp, hash } = req.body;
         const isMatch = await validateOTP(hash, otp, email);
         if (isMatch) {
-            return res.json(formatAPI('Email is verified.', true))
+             return res.json(formatAPI('Email is verified.', true))
         } else {
             return res.status(400)
                 .json(formatError('The OTP entered is incorrect .', false));

@@ -8,12 +8,17 @@ const mailSender = require("./mailer");
 const generalTemplate = require("./generalTemplate");
 
 const sendEmailOTP = async (email, otp) => {
-  const savedData = await mailSender({
-    to: [email],
-    subject: generalTemplate.otp.subject(),
-    html: generalTemplate.otp.html(otp),
-  });
-  return savedData;
+  try {
+      const savedData = await mailSender({
+          to: [email],
+          subject: generalTemplate.otp.subject(),
+          html: generalTemplate.otp.html(otp),
+      });
+      console.log('savedData', savedData)
+      return formatAPI('', savedData);
+  } catch (e) {
+      return formatError('Error Sending an email');
+  }
 };
 
 const getTodayMidnightTimestamp = () => {
@@ -40,6 +45,8 @@ const generateOTP = async (email) => {
       specialChars: false,
     });
     sendEmailOTP(email, otp).then();
+    // const responseEmail = await sendEmailOTP(email, otp).then();
+    // if(!responseEmail.success) return responseEmail;
     console.error('OTP', otp);
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(
