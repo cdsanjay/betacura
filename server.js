@@ -5,7 +5,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 // const favicon = require('express-favicon');
 const path = require('path');
-const port = process.env.NODE_PORT || 3000;
+const port = process.env.NODE_PORT || 3001;
 const app = express();
 // app.use(favicon(__dirname + '/build/favicon.ico'));
 

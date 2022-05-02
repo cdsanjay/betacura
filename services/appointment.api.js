@@ -6,6 +6,8 @@ const { check } = require('express-validator');
 const Razorpay = require('razorpay');
 const path = require('path');
 const bodyParser = require('body-parser')
+const {generateOTP, validateOTP} = require("./otp");
+const {formatAPI, formatError} = require("./util/format");
 
 const razorpay = new Razorpay({
     key_id: process.env.REACT_APP_RAZOR_KEY_ID,
@@ -91,5 +93,68 @@ router.post(
         }
     },
 );
+
+const validateEmail = (email) => {
+    email = (email || "").toString().toLowerCase().trim();
+    return email;
+}
+
+// @route:  POST api/email/send
+// @desc:  send email
+// @access: private (admin)
+router.put(
+    '/send-otp',
+    async (req, res) => {
+        // send Email
+        try {
+            let {email} =req.body;
+            console.log('email',email)
+            email = validateEmail(email)
+            // let email = "idsanjay82@gmail.com";
+            if(!email) {
+                return res.status(400).json({
+                    message: 'Invalid Email ID',
+                    success: false,
+                })
+            }
+            // create
+            const hashResponse = await generateOTP(email);
+            if (hashResponse.success) {
+                return res.json(formatAPI(`OTP is sent to ${email} email `, {
+                    hash: hashResponse.data,
+                    email,
+                    length: process.env.OTP_LENGTH || 4,
+                }));
+            }
+            return res.status(400).json(hashResponse);
+        } catch (error) {
+            console.log('error', error);
+            return res.status(400).json({
+                message: 'Unable to process.',
+            });
+        }
+    },
+);
+
+router.put('/validate-pin',
+    async (req, res) => {
+        let {email} =req.body;
+        email = validateEmail(email)
+        if(!email) {
+            return res.status(400).json({
+                message: 'Invalid Email ID',
+                success: false,
+            })
+        }
+        const { otp, hash } = req.body;
+        const isMatch = await validateOTP(hash, otp, email);
+        if (isMatch) {
+            return res.json(formatAPI('Email is verified.', true))
+        } else {
+            return res.status(400)
+                .json(formatError('The OTP entered is incorrect .', false));
+        }
+    });
+
 
 module.exports = router;

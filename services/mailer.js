@@ -9,6 +9,16 @@ const nodemailer = require('nodemailer');
 async function mailSender({
   to, subject, html, text,
 }) {
+  console.log('email config ', {
+    host: process.env.EMAIL_SMTP_HOST,
+    port: process.env.EMAIL_SMTP_PORT,
+    secure: true,
+    service: 'Gmail',
+    auth: {
+      user: process.env.EMAIL_AUTH_ID,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
   const transport = nodemailer.createTransport({
     host: process.env.EMAIL_SMTP_HOST,
     port: process.env.EMAIL_SMTP_PORT,
