@@ -27,7 +27,12 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/ping', function (req, res) {
     return res.send('pong!');
 });
-app.get('/*', function (req, res) {
+app.use('/',  (req, res) => `
+<div style="margin: auto">
+<h1>Coming soon...</h1>
+</div>
+`);
+app.get('/codexxa', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.listen(port);

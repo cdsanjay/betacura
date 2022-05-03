@@ -13,8 +13,8 @@ export default function EmployeeDetails(props) {
     const defaultValues = {
         name1: values.employeeDetails[0]?.name,
         id: values.employeeDetails[0]?.id,
-        idprooftype: values.employeeDetails[0]?.idprooftype,
-        idproof: values.employeeDetails[0]?.idproof,
+        // idprooftype: values.employeeDetails[0]?.idprooftype,
+        // idproof: values.employeeDetails[0]?.idproof,
         phone1: values.employeeDetails[0]?.phone,
         email1: values.employeeDetails[0]?.email,
         age1: values.employeeDetails[0]?.age,
@@ -64,8 +64,8 @@ export default function EmployeeDetails(props) {
                     gender: data.gender1,
                     name: data.name1,
                     id: data.id,
-                    idprooftype: data.idprooftype,
-                    idproof: data.idproof,
+                    // idprooftype: data.idprooftype,
+                    // idproof: data.idproof,
                     phone: data.phone1,
                     email: email
                 }
@@ -248,28 +248,28 @@ export default function EmployeeDetails(props) {
                                className="border p-2 w-full" placeholder="Employee Id"/>
                         {errors.id && <small className="text-danger">Employee ID is required</small>}
                     </div>
-                    <div className="col-md-4">
-                        <div className="py-2 text-dark font-medium">Employee Id proof *</div>
-                        <select name="idprooftype" className="form-select" ref={register({required: true})}
-                                defaultValue={idproof} onChange={(e) => {
-                            setIdproof(e.target.value)
-                        }}>
-                            <option value="">- Select -</option>
-                            <option value="Aadhar Card">Aadhar Card</option>
-                            <option value="Pan Card">Pan Card</option>
-                            <option value="Passport">Passport</option>
-                        </select>
-                        {errors.idprooftype && <small className="text-danger">Employee ID proof is required</small>}
-                    </div>
+                    {/*<div className="col-md-4">*/}
+                    {/*    <div className="py-2 text-dark font-medium">Employee Id proof *</div>*/}
+                    {/*    <select name="idprooftype" className="form-select" ref={register({required: true})}*/}
+                    {/*            defaultValue={idproof} onChange={(e) => {*/}
+                    {/*        setIdproof(e.target.value)*/}
+                    {/*    }}>*/}
+                    {/*        <option value="">- Select -</option>*/}
+                    {/*        <option value="Aadhar Card">Aadhar Card</option>*/}
+                    {/*        <option value="Pan Card">Pan Card</option>*/}
+                    {/*        <option value="Passport">Passport</option>*/}
+                    {/*    </select>*/}
+                    {/*    {errors.idprooftype && <small className="text-danger">Employee ID proof is required</small>}*/}
+                    {/*</div>*/}
 
-                    {idproof ? <>
-                        <div className="col-md-4">
-                            <div className="py-2 text-dark font-medium">{idproof}*</div>
-                            <input type="file" accept="image/*,.pdf" name="idproof" ref={register({required: true})}
-                                   className="border p-2 w-full" placeholder={idproof}/>
-                            {errors.idproof && <small className="text-danger">{idproof} is required</small>}
-                        </div>
-                    </> : <></>}
+                    {/*{idproof ? <>*/}
+                    {/*    <div className="col-md-4">*/}
+                    {/*        <div className="py-2 text-dark font-medium">{idproof}*</div>*/}
+                    {/*        <input type="file" accept="image/*,.pdf" name="idproof" ref={register({required: true})}*/}
+                    {/*               className="border p-2 w-full" placeholder={idproof}/>*/}
+                    {/*        {errors.idproof && <small className="text-danger">{idproof} is required</small>}*/}
+                    {/*    </div>*/}
+                    {/*</> : <></>}*/}
 
                     <div className="col-md-4">
                         <div className="py-2 text-dark font-medium">Contact Number *</div>
