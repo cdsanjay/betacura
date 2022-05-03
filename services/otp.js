@@ -14,10 +14,10 @@ const sendEmailOTP = async (email, otp) => {
           subject: generalTemplate.otp.subject(),
           html: generalTemplate.otp.html(otp),
       });
-      console.log('savedData', savedData)
+      console.log('savedData email', savedData)
       return formatAPI('', savedData);
-  } catch (e) {
-      return formatError('Error Sending an email');
+  } catch (error) {
+      return formatError('Error Sending an email', error);
   }
 };
 
