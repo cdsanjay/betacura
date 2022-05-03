@@ -21,20 +21,26 @@ app.use(cors());
 app.use('/api/appointment', require('./services/appointment.api'));
 app.use('/api/employee', require('./services/employee.api'));
 
-// the __dirname is the current directory from where the script is running
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
+
 app.get('/ping', function (req, res) {
     return res.send('pong!');
 });
-app.use('/',  (req, res) => `
+// Or just the asset.
+app.use('/website', (req, res, next) => {
+    req.url = path.basename(req.originalUrl);
+    app.use(express.static(path.join(__dirname, 'build')))(req, res, next);
+});
+
+app.get('/website/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+app.get('/',  (req, res) => res.send(`
 <div style="margin: auto">
 <h1>Coming soon...</h1>
 </div>
-`);
-app.get('/codexxa', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+`));
+
+// the __dirname is the current directory from where the script is running
 app.listen(port);
 
 process.stdout.write('Betacura is serving in port: '+port)
