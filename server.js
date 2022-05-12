@@ -21,17 +21,15 @@ app.use(cors());
 app.use('/api/appointment', require('./services/appointment.api'));
 app.use('/api/employee', require('./services/employee.api'));
 
-
+// the __dirname is the current directory from where the script is running
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
 app.get('/ping', function (req, res) {
     return res.send('pong!');
 });
-app.use(express.static(path.join(__dirname, 'build')))(req, res, next);
-
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
-// the __dirname is the current directory from where the script is running
 app.listen(port);
 
-process.stdout.write('Betacura is serving in port: '+port)
+process.stdout.write('BNY is serving in port: '+port)
