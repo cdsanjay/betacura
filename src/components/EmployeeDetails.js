@@ -433,9 +433,9 @@ export default function EmployeeDetails(props) {
                     <div className="col-md-12">
                         <button
                             // // disabled={status !== "confirmed"}
-                            // onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
-                            // type={status === "confirmed" ? "submit" : "button"}
-                            type={"submit"}
+                            onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
+                            type={status === "confirmed" ? "submit" : "button"}
+                            // type={"submit"}
                                 className="cursor-pointer p-2 px-3 bg-success text-white text-center w-1/2 md:w-1/6 mt-3">Continue
                         </button>
                     </div>
