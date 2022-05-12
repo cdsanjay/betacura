@@ -293,17 +293,17 @@ function App() {
                                     <div key={key} className="text-dark text-sm">
                                       <span className="text-sm md:text-lg text-secondary font-medium">{values.employeeDetails[key].name}</span>
                                       : {el?.packageName}</div>
-                                    <div className="text-sm">
-                                      <span className="text-secondary">Add-on Package: </span>
-                                      <span>{el?.addons?.map(el=>(el+","))}</span>
-                                    </div>
+                                    {/*<div className="text-sm">*/}
+                                    {/*  <span className="text-secondary">Add-on Package: </span>*/}
+                                    {/*  <span>{el?.addons?.map(el=>(el+","))}</span>*/}
+                                    {/*</div>*/}
                                   </>
                               ))}
                             </>:<>
                               {values?.packageDetails?.map((el,key)=>(
                                   <>
                                     <div key={key} className="text-dark text-sm">Package: {el.packageName}</div>
-                                    <div className="text-dark text-sm">Add-on Package: {el.addons?.map(el=>(el+","))}</div>
+                                    {/*<div className="text-dark text-sm">Add-on Package: {el.addons?.map(el=>(el+","))}</div>*/}
                                   </>
                               ))}
                             </>}

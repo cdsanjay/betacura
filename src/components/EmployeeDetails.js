@@ -23,19 +23,19 @@ export default function EmployeeDetails(props) {
     };
     values?.employeeDetails?.map((value, index) => {
         if (index === 0) return;
+        console.log('value employee', value);
         const familyDetail = {
             name: value.name, phone: value.phone, email: value.email, age: value.age, gender: value.gender,
         };
         defaultValues.family.push(familyDetail);
     })
-
+    console.log('defaultValues employee', defaultValues);
 
     const {register, handleSubmit, errors, control} = useForm({
-        // TODO Remove this ||
         defaultValues
     });
     const {fields, remove, append} = useFieldArray({
-        control, name: `family`
+        control, name: 'family'
     });
 
     const [idproof, setIdproof] = React.useState("")
@@ -432,8 +432,10 @@ export default function EmployeeDetails(props) {
 
                     <div className="col-md-12">
                         <button
-                            // disabled={status !== "confirmed"}
-                            onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')} type={status === "confirmed" ? "submit" : "button"}
+                            // // disabled={status !== "confirmed"}
+                            // onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
+                            // type={status === "confirmed" ? "submit" : "button"}
+                            type={"submit"}
                                 className="cursor-pointer p-2 px-3 bg-success text-white text-center w-1/2 md:w-1/6 mt-3">Continue
                         </button>
                     </div>

@@ -1,20 +1,27 @@
 export const packageList = [
     {
-        name: "Package A", price: 2000, count: 29, data: [
-            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)", "Diabetic Checkup (F.B.S, HBA1C)",
-            "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+        name: "Male Package", price: 2999, count: 29, data: [
+            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
+            "Diabetic Checkup (Glucose Fasting, HBA1C)",
             "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-            "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-            "Physician Examination", "Teleconsultation"
+            "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
+            "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+            "Thyroid Profile (T3, T4, TSH, PSA)",
+            "Vitamin Profile (Vitamin D, Vitamin B12)",
+            "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
         ]
     },
     {
-        name: "Package B", price: 2000, count: 23, data: [
-            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)", "Diabetic Checkup (F.B.S, HBA1C)",
+        name: "Female Package", price: 3849, count: 23, data: [
+            "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
+            "Diabetic Checkup (Glucose Fasting, HBA1C)",
+            "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
+            "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
             "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-            "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-            "Thyroid Profile (T3, T4, TSH)", "Radiological Test (ECG)",
-            "USG Abdomen", "Physician Examination", "Teleconsultation"
+            "Thyroid Profile (T3, T4, TSH, PAP SMEAR, USG - Abdomen)",
+            "Vitamin Profile (Vitamin D, Vitamin B12)",
+            "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
+            // "USG Abdomen", "Physician Examination", "Teleconsultation"
         ]
     }
 ]
@@ -79,7 +86,8 @@ export const customizePackageList = [
 ]
 
 
-export const addons = [{value: "Ante Natal ( BSR / Hbsag / HIV / RPR / TSH / CUE / ABO / CBC ) ", price: 1100},
+export const addons = [
+    {value: "Ante Natal ( BSR / Hbsag / HIV / RPR / TSH / CUE / ABO / CBC ) ", price: 1100},
     {value: "Beta Human Chorionic Gonodotropin (Beta HCG) ", price: 600},
     {value: "Bilirubin (Total, Direct & Indirect ) ", price: 230},
     {value: "CA125 - Ovarian Cancer marker ", price: 1100},

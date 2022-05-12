@@ -10,11 +10,13 @@ export default function PaymentDetails(props) {
   const addonPrice1 = values.packageDetails[0]
       ? values.packageDetails[0].addonprice
       : 0;
-  const employeePrice = customized1
-      ? pkgPrice1 > 2000
-          ? pkgPrice1 - 2000
-          : 0
-      : 0;
+  console.log('values.employeeDetails[0].age', values.employeeDetails[0].age, pkgPrice1)
+  const employeePrice = values.employeeDetails[0].age <= 40 ? pkgPrice1 : 0;
+  // const employeePrice = customized1
+  //     ? pkgPrice1 > 2000
+  //         ? pkgPrice1 - 2000
+  //         : 0
+  //     : 0;
 
   const hcc = 250;
 
@@ -80,7 +82,7 @@ export default function PaymentDetails(props) {
                           </div>
                           <div className="w-1/6">{values.packageDetails[index].count}</div>
                           <div className="text-right w-2/6 md:w-1/6">
-                            {index === 0 && <s>Rs. {values.packageDetails[0].pkgprice}</s>}
+                            {(index === 0 && employeePrice === 0) &&  <s>Rs. {values.packageDetails[0].pkgprice}</s>}
                             <div> Rs. {index === 0 ? employeePrice : values.packageDetails[index].pkgprice || values?.packageDetails[index]?.customized} </div>
                           </div>
                         </div>
@@ -116,7 +118,7 @@ export default function PaymentDetails(props) {
                       <></>
                   )}
 
-                  {values.packageDetails[index].addonsArray.length > 0 ? (
+                  {(values.packageDetails[index].addonsArray && values.packageDetails[index].addonsArray.length > 0) ? (
                       <>
                         <div className="text-dark font-medium w-3/6 md:w-4/6">
                           Add on tests

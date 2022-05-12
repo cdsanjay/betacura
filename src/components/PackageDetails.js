@@ -4,7 +4,7 @@ import { addons, customizePackageList } from "./globalVar";
 
 
 
-const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, values, index, register, getValues}) => {
+const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, gender, familyName, values, index, register, getValues}) => {
 
   const [customizePrice2, setCustomizePrice2] = React.useState(0);
   const [addonPrice2, setAddonPrice2] = React.useState(0);
@@ -16,47 +16,41 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
   );
   const packageList = [
     {
-      name: "Package A",
-      price: 2000,
-      count: 29,
-      data: [
+      Male: true, Female: false, name: "Male Package", price: 2999, count: 29, data: [
         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+        "Diabetic Checkup (Glucose Fasting, HBA1C)",
         "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
+        "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
+        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+        "Thyroid Profile (T3, T4, TSH, PSA)",
+        "Vitamin Profile (Vitamin D, Vitamin B12)",
+        "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
+      ]
     },
     {
-      name: "Package B",
-      price: 2000,
-      count: 23,
-      data: [
+      Male: false, Female: true, name: "Female Package", price: 3849, count: 23, data: [
         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
+        "Diabetic Checkup (Glucose Fasting, HBA1C)",
+        "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
+        "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
         "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Thyroid Profile (T3, T4, TSH)",
-        "Radiological Test (ECG)",
-        "USG Abdomen",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
-    { name: "Customize Package", price: customizePrice2, count: 0, data: [] },
+        "Thyroid Profile (T3, T4, TSH, PAP SMEAR, USG - Abdomen)",
+        "Vitamin Profile (Vitamin D, Vitamin B12)",
+        "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
+        // "USG Abdomen", "Physician Examination", "Teleconsultation"
+      ]
+    }
   ];
   const [selectedPackage, setSelectedPackage] = React.useState(
       String(
           packageList.findIndex(
-              (e) => e.name === values?.packageDetails[index]?.packageName
+              (e) => e[gender]
           )
       ) === "-1"
           ? ""
           : String(
           packageList.findIndex(
-              (e) => e.name === values?.packageDetails[index]?.packageName
+              (e) => e[gender]
           )
           )
   );
@@ -123,18 +117,58 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
         *
       </div>
       <select
-          name={`category_${index}`}
-          className="form-select my-1"
-          defaultValue={category}
+          disabled={true}
+          // name={"package1"}
+          name={`package2_${index}`}
+          defaultValue={selectedPackage}
           onChange={(e) => {
-            setCategory(e.target.value)
+            setSelectedPackage(e.target.value);
             handleChange();
           }}
+          className="form-select"
+          ref={register}
       >
-        <option value="">- Select -</option>
-        <option value="0">Packages</option>
-        <option value="1">Addons</option>
+        <option value="">- Select Package -</option>
+        {packageList.map((el, key) => (
+            <option key={key} value={key}>
+              {el.name}
+            </option>
+        ))}
       </select>
+      <div className="flex-row md:flex my-2">
+        <div className="w-full md:w-5/6">
+          {packageList[selectedPackage]?.data.map((e, k) => (
+              <span key={k}> {e + ", "} </span>
+          ))}
+        </div>
+        {selectedPackage !== "2" && selectedPackage !== "" ? (
+            <div className="text-right pl-4 font-medium w-full md:w-1/6">
+              <div>
+                {" "}
+                Rs.{" "}
+                {packageList[selectedPackage]
+                    ? packageList[selectedPackage].price
+                    : 0}{" "}
+              </div>
+            </div>
+        ) : (
+            <></>
+        )}
+      </div>
+
+      {/*<select*/}
+      {/*    name={`category_${index}`}*/}
+      {/*    className="form-select my-1"*/}
+      {/*    defaultValue={category}*/}
+      {/*    onChange={(e) => {*/}
+      {/*      setCategory(e.target.value)*/}
+      {/*      handleChange();*/}
+      {/*    }}*/}
+      {/*>*/}
+      {/*  <option value="">- Select -</option>*/}
+      {/*  <option value="0">Packages</option>*/}
+      {/*  <option value="1">Addons</option>*/}
+      {/*</select>*/}
 
       {category === "0" ? (
           <>
@@ -324,6 +358,7 @@ const FamilyPackage = ({setFamilyPkgIndex, setFamilyPriceIndex, familyName, valu
     </div>
   </>
 }
+
 export default function PackageDetails(props) {
 
   const [customizePrice1, setCustomizePrice1] = React.useState(0);
@@ -343,15 +378,50 @@ export default function PackageDetails(props) {
   }
   const { values, setValues, handleStep, family } = props;
   useEffect(() => {
-    if(values && values.employeeDetails && values.employeeDetails.length > 1){
-      setFamilyPrice(new Array(values.employeeDetails.length - 1).fill(0))
-      setFamilyPackages(new Array(values.employeeDetails.length - 1).fill({}))
+    if(values && values.employeeDetails && values.employeeDetails.length > 0){
+      const familyPkgTemp = [];
+      const familyPriceTemp = [];
+      values.employeeDetails.forEach((family, index) => {
+        const selectedPackageDefault = String(
+            packageList.findIndex(
+                (e) => e[family?.gender]
+            )
+        );
+        const pkgprice1 = packageList[selectedPackageDefault]?.price;
+
+        if(index !== 0) {
+          const count1 = packageList[selectedPackageDefault]?.count;
+          var pkg1 = {
+            packageName: packageList[selectedPackageDefault]?.name,
+            pkgDesc: packageList[selectedPackageDefault]?.data.join(", "),
+            addOnPackages: [],
+            count: count1,
+            addonsArray: [],
+            addons: [],
+            customArray: [],
+            customizePackage: [],
+            // price:price1,
+            pkgprice: pkgprice1,
+            addonprice: 0,
+            customized: false,
+            category: "",
+          };
+          familyPriceTemp.push(pkgprice1);
+          familyPkgTemp.push(pkg1)
+        }
+        else if(index === 0) {
+          setPrice1(family?.age > 40 ? 0 : pkgprice1)
+        }
+      })
+      setFamilyPrice(familyPriceTemp)
+      setFamilyPackages(familyPkgTemp)
     }
   }, [values]);
 
   const [addonPrice1, setAddonPrice1] = React.useState(0);
 
   const [totalPrice1, setPrice1] = React.useState(0);
+  console.log('totalPrice1', totalPrice1 || "no")
   // const [totalPrice,setPrice] = React.useState(0);
   const [addonbar1, setAddonbar1] = React.useState(false);
   const [customizeBar1, setCustomizeBar1] = React.useState(false);
@@ -362,48 +432,42 @@ export default function PackageDetails(props) {
 
   const packageList = [
     {
-      name: "Package A",
-      price: 2000,
-      count: 29,
-      data: [
+      Male: true, Female: false, name: "Male Package", price: 2999, count: 29, data: [
         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
-        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+        "Diabetic Checkup (Glucose Fasting, HBA1C)",
         "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
+        "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
+        "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
+        "Thyroid Profile (T3, T4, TSH, PSA)",
+        "Vitamin Profile (Vitamin D, Vitamin B12)",
+        "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
+      ]
     },
     {
-      name: "Package B",
-      price: 2000,
-      count: 23,
-      data: [
+      Male: false, Female: true, name: "Female Package", price: 3849, count: 23, data: [
         "Preliminary Test (Complete Blood Count, ESR, Urine Routine)",
-        "Diabetic Checkup (F.B.S, HBA1C)",
+        "Diabetic Checkup (Glucose Fasting, HBA1C)",
+        "Liver Profile (Bilirubin Total, Bilirubin Direct, Bilirubin Indirect, SGOT, SGPT, Total Protien, Albumin, Globulin, Alkaline  Phosphate, Gamma G.T)",
+        "Lipid Profile (Total Cholesterol, S.Triglyceride, HDL Cholestrol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
         "Kidney Profile (Electrolytes, BUN, Creatinine, Uric Acid, Calcium, Phosphorus)",
-        "Lipid Profile (Total Cholesterol, LDLC, VLDL, LDL/HDLC Ratio, TC/DLC Ratio)",
-        "Thyroid Profile (T3, T4, TSH)",
-        "Radiological Test (ECG)",
-        "USG Abdomen",
-        "Physician Examination",
-        "Teleconsultation",
-      ],
-    },
-    { name: "Customize Package", price: customizePrice1, count: 0, data: [] },
-  ];
+        "Thyroid Profile (T3, T4, TSH, PAP SMEAR, USG - Abdomen)",
+        "Vitamin Profile (Vitamin D, Vitamin B12)",
+        "Biometric Screening (Height, Weight, BMI, Blood Pressure, Ramdon Blood Sugar )",
+        // "USG Abdomen", "Physician Examination", "Teleconsultation"
+      ]
+    }
+  ]
 
   const [selectedPackage1, setSelectedPackage1] = React.useState(
       String(
           packageList.findIndex(
-              (e) => e.name === values.packageDetails[0]?.packageName
+              (e) => e[values.employeeDetails[0]?.gender]
           )
       ) === "-1"
           ? ""
           : String(
           packageList.findIndex(
-              (e) => e.name === values.packageDetails[0]?.packageName
+              (e) => e[values.employeeDetails[0]?.gender]
           )
           )
   );
@@ -413,37 +477,39 @@ export default function PackageDetails(props) {
 
   const [charge, setCharge] = React.useState(false);
 
+  const defaultValues = {
+    package1:
+        String(
+            packageList.findIndex(
+                (e) => e[values.employeeDetails[0]?.gender]
+            )
+        ) === "-1"
+            ? ""
+            : String(
+                packageList.findIndex(
+                    (e) => e[values.employeeDetails[0]?.gender]
+                )
+            ),
+    package2:
+        String(
+            packageList.findIndex(
+                (e) => e.name === values.packageDetails[1]?.packageName
+            )
+        ) === "-1"
+            ? ""
+            : String(
+                packageList.findIndex(
+                    (e) => e.name === values.packageDetails[1]?.packageName
+                )
+            ),
+    addons1: values.packageDetails[0]?.addonsArray,
+    addons2: values.packageDetails[1]?.addonsArray,
+    customizePackage1: values.packageDetails[0]?.customArray,
+    customizePackage2: values.packageDetails[1]?.customArray,
+  };
+  console.log('default Value employee', defaultValues)
   const { register, getValues, handleSubmit } = useForm({
-    defaultValues: {
-      package1:
-          String(
-              packageList.findIndex(
-                  (e) => e.name === values.packageDetails[0]?.packageName
-              )
-          ) === "-1"
-              ? ""
-              : String(
-              packageList.findIndex(
-                  (e) => e.name === values.packageDetails[0]?.packageName
-              )
-              ),
-      package2:
-          String(
-              packageList.findIndex(
-                  (e) => e.name === values.packageDetails[1]?.packageName
-              )
-          ) === "-1"
-              ? ""
-              : String(
-              packageList.findIndex(
-                  (e) => e.name === values.packageDetails[1]?.packageName
-              )
-              ),
-      addons1: values.packageDetails[0]?.addonsArray,
-      addons2: values.packageDetails[1]?.addonsArray,
-      customizePackage1: values.packageDetails[0]?.customArray,
-      customizePackage2: values.packageDetails[1]?.customArray,
-    },
+    defaultValues: defaultValues,
   });
 
   // useEffect(() => {
@@ -502,12 +568,19 @@ export default function PackageDetails(props) {
   };
 
   const onSubmit = (data) => {
-    var addons1 = data.addons1?.map((e) => addons[Number(e)].value);
-    var addons2 = data.addons2?.map((e) => addons[Number(e)].value);
-    var customizePackage1 = data.customizePackage1?.map(
+    console.log('employee data data', data);
+    const selectedPackageDefault = String(
+        packageList.findIndex(
+            (e) => e[values.employeeDetails[0]?.gender]
+        )
+    )
+    data.package1 = selectedPackageDefault;
+    var addons1 = [] || data.addons1?.map((e) => addons[Number(e)].value);
+    var addons2 = [] ||  data.addons2?.map((e) => addons[Number(e)].value);
+    var customizePackage1 = [] || data.customizePackage1?.map(
         (e) => customizePackageList[Number(e)].value
     );
-    var customizePackage2 = data.customizePackage2?.map(
+    var customizePackage2 = [] || data.customizePackage2?.map(
         (e) => customizePackageList[Number(e)].value
     );
     var customized1 = data.package1 === "2";
@@ -529,22 +602,27 @@ export default function PackageDetails(props) {
       count2 = data.customizePackage2.length;
       // pkgprice2 = customizePrice2;
     }
-    var addonPackages1 = data.addons1?.map((e) => ({
+    var addonPackages1 = [] || data.addons1?.map((e) => ({
       name: addons[Number(e)].value,
       price: addons[Number(e)].price,
     }));
-    var addonPackages2 = data.addons2?.map((e) => ({
+    var addonPackages2 = [] || data.addons2?.map((e) => ({
       name: addons[Number(e)].value,
       price: addons[Number(e)].price,
     }));
+    // String(
+    //     packageList.findIndex(
+    //         (e) => e[values.employeeDetails[0]?.gender]
+    //     )
+    // )
     var pkg1 = {
       packageName: packageList[data.package1]?.name,
       pkgDesc: packageList[data.package1]?.data.join(", "),
       addOnPackages: addonPackages1,
       count: count1,
-      addonsArray: data.addons1,
+      addonsArray: data.addons1 || [],
       addons: addons1,
-      customArray: data.customizePackage1,
+      customArray: data.customizePackage1 || [],
       customizePackage: customizePackage1,
       // price:price1,
       pkgprice: pkgprice1,
@@ -592,17 +670,57 @@ export default function PackageDetails(props) {
                 )}
                 *
               </div>
-              <select
-                  name="category"
-                  className="form-select my-1"
-                  defaultValue={category1}
-                  onMouseLeave={(e) => handleChange()}
-                  onChange={(e) => setCategory1(e.target.value)}
-              >
-                <option value="">- Select -</option>
-                <option value="0">Corporate Sponsored</option>
-                <option value="1">Addons</option>
-              </select>
+                <select
+                    disabled={true}
+                    name={"package1"}
+                    defaultValue={selectedPackage1}
+                    onChange={(e) => {
+                      setSelectedPackage1(e.target.value);
+                      handleChange();
+                    }}
+                    className="form-select"
+                    ref={register}
+                >
+                  <option value="">- Select Package -</option>
+                  {packageList.map((el, key) => (
+                      <option key={key} value={key}>
+                        {el.name}
+                      </option>
+                  ))}
+                </select>
+                <div className="flex-row md:flex my-2">
+                  <div className="w-full md:w-5/6">
+                    {packageList[selectedPackage1]?.data.map((e, k) => (
+                        <span key={k}> {e + ", "} </span>
+                    ))}
+                  </div>
+                  <div className="ml-auto text-right pl-4 font-medium w-full md:w-1/6">
+                    <div>
+                      {" "}
+                      {values.employeeDetails[0]?.age > 40 ? <s>
+                        {" "}
+                        Rs.{" "}
+                        {packageList[selectedPackage1]
+                            ? packageList[selectedPackage1].price
+                            : 0}{" "}
+                      </s> : <span>{packageList[selectedPackage1]
+                          ? packageList[selectedPackage1].price
+                          : 0}</span>}{" "}
+                    </div>
+                    {values.employeeDetails[0]?.age > 40 && <div> FREE </div>}
+                  </div>
+                </div>
+              {/*<select*/}
+              {/*    name="category"*/}
+              {/*    className="form-select my-1"*/}
+              {/*    defaultValue={category1}*/}
+              {/*    onMouseLeave={(e) => handleChange()}*/}
+              {/*    onChange={(e) => setCategory1(e.target.value)}*/}
+              {/*>*/}
+              {/*  <option value="">- Select -</option>*/}
+              {/*  <option value="0">Corporate Sponsored</option>*/}
+              {/*  <option value="1">Addons</option>*/}
+              {/*</select>*/}
               {category1 === "0" ? (
                   <>
                     <div>
@@ -808,7 +926,7 @@ export default function PackageDetails(props) {
             {/* Package 2 */}
             {values.employeeDetails.map((familyDetail, index) => {
               if(index === 0) return <></>;
-              return <FamilyPackage setFamilyPkgIndex={setFamilyPkgIndex} setFamilyPriceIndex={setFamilyPriceIndex} getValues={getValues} familyName={familyDetail?.name} index={index-1} values={values} handleChange={handleChange} register={register()} />
+              return <FamilyPackage setFamilyPkgIndex={setFamilyPkgIndex} setFamilyPriceIndex={setFamilyPriceIndex} getValues={getValues} gender={familyDetail?.gender} familyName={familyDetail?.name} index={index-1} values={values} handleChange={handleChange} register={register()} />
             })}
 
             <hr className="my-3" />
