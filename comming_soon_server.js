@@ -25,11 +25,20 @@ app.use('/api/employee', require('./services/employee.api'));
 app.get('/ping', function (req, res) {
     return res.send('pong!');
 });
-app.use(express.static(path.join(__dirname, 'build')))(req, res, next);
+// Or just the asset.
+app.use('/website', (req, res, next) => {
+    req.url = path.basename(req.originalUrl);
+    app.use(express.static(path.join(__dirname, 'build')))(req, res, next);
+});
 
-app.get('/*', function (req, res) {
+app.get('/website/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+app.get('/',  (req, res) => res.send(`
+<div style="margin: auto">
+<h1>Coming soon...</h1>
+</div>
+`));
 
 // the __dirname is the current directory from where the script is running
 app.listen(port);
