@@ -91,35 +91,46 @@ function App() {
     // setStep(step+1)
 
     // console.log(values.employeeDetails[0].idproof)
-    var formData = new FormData();
-    formData.append("type","BCuraLead")
-    formData.append("file",values.employeeDetails[0].idproof[0])
-    formData.append("fileName",values.employeeDetails[0].idproof[0].name)
-    formData.append("mediaType","image")
-    console.log(formData)
-    const serverOrigin ='https://reachlocalads.com';
-    //const serverOrigin ='http://13.233.125.97:8080';
-    fetch(serverOrigin+"/upload/ext/file",{
-      method: 'POST',
-      body: formData,
-    }).then(async d=>await d.json()).then(json=>{
-      setImageUrl(json.url);
-      data.idProofURL = json;
-      console.log(json);
-      // after image saved.. proceed for payment
-    }).catch(err=>{
-      console.log(err)
-    }).finally(()=>{
-      // TODO 1. mail the data
+    if(false) {
 
-      // TODO 2. handle the payment
-      if(payment === 'ONLINE'){
-        displayRazorpay(total, data, payment);
-      }
-      else if(payment === "CASH"){
-        emailTheResponse(total, data, payment)
-      }
-    })
+      var formData = new FormData();
+      formData.append("type","BCuraLead")
+      formData.append("file",values.employeeDetails[0].idproof[0])
+      formData.append("fileName",values.employeeDetails[0].idproof[0].name)
+      formData.append("mediaType","image")
+      console.log(formData)
+      const serverOrigin ='https://reachlocalads.com';
+      //const serverOrigin ='http://13.233.125.97:8080';
+      fetch(serverOrigin+"/upload/ext/file",{
+        method: 'POST',
+        body: formData,
+      }).then(async d=>await d.json()).then(json=>{
+        setImageUrl(json.url);
+        data.idProofURL = json;
+        console.log(json);
+        // after image saved.. proceed for payment
+      }).catch(err=>{
+        console.log(err)
+      }).finally(()=>{
+        // TODO 1. mail the data
+
+        // TODO 2. handle the payment
+        if(payment === 'ONLINE'){
+          displayRazorpay(total, data, payment);
+        }
+        else if(payment === "CASH"){
+          emailTheResponse(total, data, payment)
+        }
+      })
+    }
+
+    // TODO here
+    if(payment === 'ONLINE'){
+      displayRazorpay(total, data, payment);
+    }
+    else if(payment === "CASH"){
+      emailTheResponse(total, data, payment)
+    }
 
     // console.log(data)
     // fetch(`${serverOrigin}/incoming-lead/receive/w/appointment`,{
