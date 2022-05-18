@@ -101,7 +101,6 @@ const stateList = {
 const onlyStates = Object.keys(stateList);
     // .filter(each => !!each);
 
-let rebuild = 0;
 export default function AppointmentDetails(props) {
   const [stateValue, setStateValue] = useState([]);
   var date1 = new Date();
@@ -227,7 +226,6 @@ export default function AppointmentDetails(props) {
         zipCode: data[`zipCode2_${index}`],
       });
     }
-    console.log("aptmFamily", aptmFamily);
     // const apmt2 = {
     //   address: data.street2,
     //   locality: data.locality2,
@@ -244,10 +242,8 @@ export default function AppointmentDetails(props) {
   };
 
   const onStateChange = (stateSelectedValue, index) => {
-    console.log('stateSelectedValue', stateSelectedValue, index);
     // if old and new value is different then proceed
     if(stateValue[index] !== stateSelectedValue) {
-      console.log(index, 'onState comparing 1', getValues(`city2_1`))
       const tempState = [...stateValue];
       tempState[index] = stateSelectedValue;
       setStateValue(tempState);
@@ -256,11 +252,8 @@ export default function AppointmentDetails(props) {
     }
   }
 
-  rebuild += 1;
-  console.log(rebuild, 'city_2', getValues('city2_1'));
   return (
       <div className="container-fluid p-4 bg-white border shadow-sm">
-        Build Times: {rebuild}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
             {family ? (
