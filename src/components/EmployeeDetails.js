@@ -8,6 +8,8 @@ import SyncLoader from "react-spinners/SyncLoader";
 // const defaultValues = {
 //     name1: "Baburam Adhikari", id: "121212", phone1: "9823119554", email1: 'idsanjay81@gmail.com',
 // }
+
+const byPassIDValidation = true;
 export default function EmployeeDetails(props) {
     const {values, setValues, handleStep, family, setFamily} = props
     const defaultValues = {
@@ -46,37 +48,43 @@ export default function EmployeeDetails(props) {
     const [spinning, setSpinning] = React.useState(false);
 
     const onSubmit = async (data) => {
-        if (data?.id) {
-            const body = {
-                employeeID: data?.id, name: data?.name1, email: data?.email1, phone: data?.phone
+        const saveAndNext = () => {
+            var emp1 = {
+                age: data.age1,
+                gender: data.gender1,
+                name: data.name1,
+                id: data.id,
+                // idprooftype: data.idprooftype,
+                // idproof: data.idproof,
+                phone: data.phone1,
+                email: email
             }
-            await fetch(`${process.env.REACT_APP_API_HOST?.trim()}/api/employee/validate/`,
-                {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            }).then(t => t.json()).then((responseData) => {
-                if (!responseData?.isValid) {
-                    return NotificationManager.error(responseData?.message);
-                }
-                var emp1 = {
-                    age: data.age1,
-                    gender: data.gender1,
-                    name: data.name1,
-                    id: data.id,
-                    // idprooftype: data.idprooftype,
-                    // idproof: data.idproof,
-                    phone: data.phone1,
-                    email: email
-                }
 
-                // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
-                setValues({...values, employeeDetails: family ? [emp1, ...data?.family] : [emp1]})
-                handleStep();
-            }).catch(() => {
-                return NotificationManager.error('Error processing your request! Server is offline');
-            })
-
+            // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
+            setValues({...values, employeeDetails: family ? [emp1, ...data?.family] : [emp1]})
+            handleStep();
+        }
+        if (data?.id) {
+            if(byPassIDValidation) {
+                saveAndNext();
+            } else {
+                const body = {
+                    employeeID: data?.id, name: data?.name1, email: data?.email1, phone: data?.phone
+                }
+                await fetch(`${process.env.REACT_APP_API_HOST?.trim()}/api/employee/validate/`,
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(body),
+                        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    }).then(t => t.json()).then((responseData) => {
+                    if (!responseData?.isValid) {
+                        return NotificationManager.error(responseData?.message);
+                    }
+                    saveAndNext();
+                }).catch(() => {
+                    return NotificationManager.error('Error processing your request! Server is offline');
+                })
+            }
         } else {
             return NotificationManager.error('Please input Employee ID');
         }
@@ -433,9 +441,9 @@ export default function EmployeeDetails(props) {
                     <div className="col-md-12">
                         <button
                             // // disabled={status !== "confirmed"}
-                            onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
-                            type={status === "confirmed" ? "submit" : "button"}
-                            // type={"submit"}
+                            // onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
+                            // type={status === "confirmed" ? "submit" : "button"}
+                            type={"submit"}
                                 className="cursor-pointer p-2 px-3 bg-success text-white text-center w-1/2 md:w-1/6 mt-3">Continue
                         </button>
                     </div>

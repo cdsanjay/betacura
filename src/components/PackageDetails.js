@@ -410,7 +410,7 @@ export default function PackageDetails(props) {
           familyPkgTemp.push(pkg1)
         }
         else if(index === 0) {
-          setPrice1(family?.age > 40 ? 0 : pkgprice1)
+          setPrice1(family?.age >= 40 ? 0 : pkgprice1)
         }
       })
       setFamilyPrice(familyPriceTemp)
@@ -697,7 +697,7 @@ export default function PackageDetails(props) {
                   <div className="ml-auto text-right pl-4 font-medium w-full md:w-1/6">
                     <div>
                       {" "}
-                      {values.employeeDetails[0]?.age > 40 ? <s>
+                      {values.employeeDetails[0]?.age >= 40 ? <s>
                         {" "}
                         Rs.{" "}
                         {packageList[selectedPackage1]
@@ -707,7 +707,7 @@ export default function PackageDetails(props) {
                           ? packageList[selectedPackage1].price
                           : 0}</span>}{" "}
                     </div>
-                    {values.employeeDetails[0]?.age > 40 && <div> FREE </div>}
+                    {values.employeeDetails[0]?.age >= 40 && <div> FREE </div>}
                   </div>
                 </div>
               {/*<select*/}

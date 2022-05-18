@@ -11,7 +11,7 @@ export default function PaymentDetails(props) {
       ? values.packageDetails[0].addonprice
       : 0;
   console.log('values.employeeDetails[0].age', values.employeeDetails[0].age, pkgPrice1)
-  const employeePrice = values.employeeDetails[0].age <= 40 ? pkgPrice1 : 0;
+  const employeePrice = values.employeeDetails[0].age >= 40 ? 0 : pkgPrice1;
   // const employeePrice = customized1
   //     ? pkgPrice1 > 2000
   //         ? pkgPrice1 - 2000
