@@ -1,13 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 
-const defaultValues = {
-  street1: "Baburam Adhikari",
-  locality1: "121212",
-  city1: "9823119554",
-  state1: "idsanjay81@gmail.com",
-  landmark1: "idsanjay81@gmail.com",
-};
 
 const stateList = {
   "Gujarat": [
@@ -151,15 +144,14 @@ export default function AppointmentDetails(props) {
     "1:00 PM - 3:00 PM",
   ];
 
-  const copyAddress = (e) => {
-    console.log(e.target.checked, 'before stateValue',getValues("city2_1"),  stateValue);
+   const copyAddress = async (e) => {
     if (e.target.checked) {
-      const tempState = [...stateValue];
-      console.log('comparing data 1', getValues("city1"));
-      console.log('comparing data 2', stateList[getValues('state1')]);
+      const tempState = Array(values.employeeDetails.length).fill(getValues("state1"));
+      await setStateValue(tempState);
+
       values.employeeDetails.map((item, index) => {
         if(index === 0) return ;
-        tempState[index] = getValues("state1");
+
         setValue(`city2_${index}`, getValues("city1"));
         setValue(`state2_${index}`, getValues("state1"));
         setValue(`street2_${index}`, getValues("street1"));
@@ -171,7 +163,6 @@ export default function AppointmentDetails(props) {
         // setValue("date4", getValues("date2"));
         // setValue("time4", getValues("time2"));
       });
-      setStateValue(tempState);
     } else {
       const tempState = [...stateValue];
       values.employeeDetails.map((item, index) => {
@@ -190,11 +181,9 @@ export default function AppointmentDetails(props) {
       });
       setStateValue(tempState);
     }
-    console.log('after stateValue', getValues("city2_1"), stateValue);
   };
 
   const onSubmit = (data) => {
-    console.log("appointmentDetails: family ? [apmt1, ...aptmFamily] : [apmt1]")
     // const date1 = data.date1 + " " + data.time1;
     // const date2 = data.date2 + " " + data.time2;
     // const date3 = data.date3 + " " + data.time3;
@@ -237,7 +226,7 @@ export default function AppointmentDetails(props) {
       ...values,
       appointmentDetails: family ? [apmt1, ...aptmFamily] : [apmt1],
     });
-    console.log("appointmentDetails", {appointmentDetails: family ? [apmt1, ...aptmFamily] : [apmt1]})
+    // console.log("appointmentDetails", {appointmentDetails: family ? [apmt1, ...aptmFamily] : [apmt1]})
     handleStep();
   };
 
@@ -247,8 +236,8 @@ export default function AppointmentDetails(props) {
       const tempState = [...stateValue];
       tempState[index] = stateSelectedValue;
       setStateValue(tempState);
-      if(index === 0) setValue(`city1`, "");
-      else setValue(`city2_${index}`, "");
+      // if(index === 0) setValue(`city1`, "");
+      // else setValue(`city2_${index}`, "");
     }
   }
 
@@ -351,78 +340,80 @@ export default function AppointmentDetails(props) {
               )}
             </div>
 
-            <div className="col-md-12">
-              <div className="py-2 text-dark font-medium">
-                Select An Appointment*
+            {false && <>
+              <div className="col-md-12">
+                <div className="py-2 text-dark font-medium">
+                  Select An Appointment*
+                </div>
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="py-2">Prefered slot 1</div>
-            </div>
-            <div className="col-md-4 my-1">
-              <input
-                  type="date"
-                  min={date1.toISOString().substr(0, 10)}
-                  name="date1"
-                  ref={register({ required: true })}
-                  className="form-control"
-              />
-              {errors.date1?.type === "required" && (
-                  <small className="text-danger">Date is required</small>
-              )}
-            </div>
-            <div className="col-md-4 my-1">
-              <select
-                  name="time1"
-                  ref={register({ required: true })}
-                  className="form-select"
-              >
-                <option value="">- Select -</option>
-                {timeList.map((e, k) => (
-                    <option key={k} value={e}>
-                      {" "}
-                      {e}{" "}
-                    </option>
-                ))}
-              </select>
-              {errors.time1?.type === "required" && (
-                  <small className="text-danger">Time is required</small>
-              )}
-            </div>
-            <div className="col-md-4"></div>
-            <div className="col-md-12">
-              <div className="py-2">Prefered slot 2</div>
-            </div>
-            <div className="col-md-4 my-1">
-              <input
-                  type="date"
-                  min={date2.toISOString().substr(0, 10)}
-                  name="date2"
-                  ref={register({ required: true })}
-                  className="form-control"
-              />
-              {errors.date2?.type === "required" && (
-                  <small className="text-danger">Date is required</small>
-              )}
-            </div>
-            <div className="col-md-4 my-1">
-              <select
-                  name="time2"
-                  ref={register({ required: true })}
-                  className="form-select"
-              >
-                <option value="">- Select -</option>
-                {timeList.map((e, k) => (
-                    <option key={k} value={e}>
-                      {" "}
-                      {e}{" "}
-                    </option>
-                ))}
-              </select>
-              {errors.time2?.type === "required" && (
-                  <small className="text-danger">Time is required</small>
-              )}
-            </div>
+              <div className="col-md-12">
+                <div className="py-2">Prefered slot 1</div>
+              </div>
+              <div className="col-md-4 my-1">
+                <input
+                    type="date"
+                    min={date1.toISOString().substr(0, 10)}
+                    name="date1"
+                    ref={register({required: true})}
+                    className="form-control"
+                />
+                {errors.date1?.type === "required" && (
+                    <small className="text-danger">Date is required</small>
+                )}
+              </div>
+              <div className="col-md-4 my-1">
+                <select
+                    name="time1"
+                    ref={register({required: true})}
+                    className="form-select"
+                >
+                  <option value="">- Select -</option>
+                  {timeList.map((e, k) => (
+                      <option key={k} value={e}>
+                        {" "}
+                        {e}{" "}
+                      </option>
+                  ))}
+                </select>
+                {errors.time1?.type === "required" && (
+                    <small className="text-danger">Time is required</small>
+                )}
+              </div>
+              <div className="col-md-4"></div>
+              <div className="col-md-12">
+                <div className="py-2">Prefered slot 2</div>
+              </div>
+              <div className="col-md-4 my-1">
+                <input
+                    type="date"
+                    min={date2.toISOString().substr(0, 10)}
+                    name="date2"
+                    ref={register({required: true})}
+                    className="form-control"
+                />
+                {errors.date2?.type === "required" && (
+                    <small className="text-danger">Date is required</small>
+                )}
+              </div>
+              <div className="col-md-4 my-1">
+                <select
+                    name="time2"
+                    ref={register({required: true})}
+                    className="form-select"
+                >
+                  <option value="">- Select -</option>
+                  {timeList.map((e, k) => (
+                      <option key={k} value={e}>
+                        {" "}
+                        {e}{" "}
+                      </option>
+                  ))}
+                </select>
+                {errors.time2?.type === "required" && (
+                    <small className="text-danger">Time is required</small>
+                )}
+              </div>
+            </>}
 
             {/* If Family Exists */}
             {family && <div className="col-md-12">
@@ -479,8 +470,8 @@ export default function AppointmentDetails(props) {
                             <option value="">- Select -</option>
 
                             {/*{(stateList.Gujarat).map(each => <option value={each}>{each}</option>)}*/}
-                            {/*{(stateValue[index] ? stateList[stateValue[index]] : []).map(each => <option value={each}>{each}</option>)}*/}
-                            {(stateList[getValues(`state2_${index}`)] || []).map(each => <option value={each}>{each}</option>)}
+                            {(stateValue[index] ? stateList[stateValue[index]] : []).map(each => <option value={each}>{each}</option>)}
+                            {/*{(stateList[getValues(`state2_${index}`)] || []).map(each => <option value={each}>{each}</option>)}*/}
                           </select>
                           {errors && errors[`city2_${index}`]?.type === "required" && (
                               <small className="text-danger">City is required</small>

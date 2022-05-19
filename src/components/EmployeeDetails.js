@@ -29,52 +29,32 @@ export default function EmployeeDetails(props) {
 
     values?.employeeDetails?.map((value, index) => {
         if (index === 0) return;
-        console.log('value employee', value);
         const familyDetail = {
-            name: value.name, phone: value.phone, email: value.email, age: value.age, gender: value.gender,
+            name: value.name,
+            phone: value.phone,
+            email: value.email,
+            age: value.age,
+            gender: value.gender,
+            relationshipType: value.relationshipType,
         };
         defaultValues.family.push(familyDetail);
     })
-    console.log('defaultValues employee', defaultValues);
-
     const {setValue, getValues, register, handleSubmit, errors, control} = useForm({
         defaultValues
     });
-
-    console.log('getValues unique', getValues('family'));
-
-
 
     const {fields, remove, append, update} = useFieldArray({
         control, name: 'family'
     });
 
-    // default values when user return to this tab, doesnot work
-    useEffect(() => {
-        if(update && values?.employeeDetails.length) {
-            const families = [];
-            values?.employeeDetails?.map((value, index) => {
-                if (index === 0) return;
-                console.log('value employee', value);
-                const familyDetail = {
-                    name: value.name, phone: value.phone, email: value.email, age: value.age, gender: value.gender,
-                };
-                append(familyDetail);
-            });
-            setRefresh(value => !value);
-
-        }
-    }, [update, values?.employeeDetails]);
-
-    const [idproof, setIdproof] = React.useState("")
+    // const [idproof, setIdproof] = React.useState("")
     const [email, setEmail] = React.useState(values.employeeDetails[0]?.email || "");
-    const [status, setStatus] = React.useState(values.employeeDetails[0]?.email ? "confirmed" : "email"); // email otp confirmed
+    const [emailStatus, setEmailStatus] = React.useState(values.employeeDetails[0]?.email ? "confirmed" : "email"); // email otp confirmed
     const [idStatus, setIdStatus] = React.useState(values.employeeDetails[0]?.id ? "confirmed" : "pending"); // confirmed pending
-    const [emailError, setEmailError] = React.useState(""); // email otp confirm
     const [otpResponse, setOtpResponse] = React.useState({});
     const [spinning, setSpinning] = React.useState(false);
     const [idSpinning, setIdSpinning] = React.useState(false);
-    const [refresh, setRefresh] = React.useState(false);
+    // const [refresh, setRefresh] = React.useState(false);
     const [employeeData, setEmployeeData] = React.useState({
         age: values.employeeDetails[0]?.age,
         gender: values.employeeDetails[0]?.gender,
@@ -82,21 +62,12 @@ export default function EmployeeDetails(props) {
         id: values.employeeDetails[0]?.id,
     });
 
-
-    // useEffect(() => {
-    //     if(!values.employeeDetails.length) {
-    //         // set state for all here
-    //         setEmployeeData({
-    //             age: values.employeeDetails[0]?.age,
-    //             gender: values.employeeDetails[0]?.gender,
-    //             name: values.employeeDetails[0]?.name,
-    //             id: values.employeeDetails[0]?.id,
-    //         })
-    //     }
-    // }, []);
-
     const onSubmit = async (data) => {
-        if (employeeData?.id) {
+        if(!employeeData?.id || idStatus !== 'confirmed') {
+            return NotificationManager.error('Please validate your Employee ID');
+        }else if(emailStatus !== 'confirmed') {
+            return NotificationManager.error('Please Verify your email first!')
+        }
             const emp1 = {
                 age: employeeData.age,
                 gender: data.gender1,
@@ -111,12 +82,8 @@ export default function EmployeeDetails(props) {
             // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
             setValues({...values, employeeDetails: (family && data?.family?.length > 0) ? [emp1, ...data?.family] : [emp1]})
             handleStep();
-        } else {
-            return NotificationManager.error('Please validate your Employee ID');
-        }
     }
     const sendOTP = async () => {
-        console.log('email ID', email);
         if(!email) {
             return NotificationManager.warning('Employee email is invalid');
         }
@@ -134,7 +101,7 @@ export default function EmployeeDetails(props) {
                 return NotificationManager.error(responseData?.message);
             }
             setOtpResponse(responseData.data);
-            setStatus("otp");
+            setEmailStatus("otp");
             return NotificationManager.info(responseData?.message);
         }).catch(() => {
             NotificationManager.error('Error while generating OTP!');
@@ -143,7 +110,6 @@ export default function EmployeeDetails(props) {
 
     const confirmOTP = async () => {
         const {otp, hash, length, email: emailResponse} = otpResponse;
-        console.log('email ID', otpResponse.otp);
         if(!otp) {
             return NotificationManager.warning('Invalid OTP');
         }
@@ -166,7 +132,7 @@ export default function EmployeeDetails(props) {
             if(idStatus === 'confirmed') {
                 setValue('gender1', employeeData?.gender);
             }
-            setStatus("confirmed");
+            setEmailStatus("confirmed");
             return NotificationManager.info(responseData?.message);
         }).catch(() => {
             NotificationManager.error('Error while validating email!');
@@ -183,14 +149,14 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4" key={item?.id}>
                             <div className="py-2 text-dark font-medium">Name *</div>
-                            <input type="text" name={`family.${index}.name`} ref={register({required: true})}
+                            <input defaultValue={item?.name} type="text" name={`family.${index}.name`} ref={register({required: true})}
                                    className="border p-2 w-full" placeholder="Your Full Name"/>
                             {errors?.family && errors?.family[index] && errors?.family[index]?.name &&
                                 <small className="text-danger">Name is required</small>}
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Gender *</div>
-                            <select name={`family.${index}.gender`} className="form-select"
+                            <select defaultValue={item?.gender} name={`family.${index}.gender`} className="form-select"
                                     ref={register({required: true})}>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -200,7 +166,7 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Relationship with Employee *</div>
-                            <select name={`family.${index}.relationshipType`} className="form-select"
+                            <select defaultValue={item?.relationshipType} name={`family.${index}.relationshipType`} className="form-select"
                                     ref={register({required: true})}>
                                 <option value="">- Select -</option>
                                 {["Father", "Mother", "Father in Law", "Mother in Law", "Husband", "Wife", "Son", "Daughter", "Brother", "Sister", "Friend",].map((relation) =>
@@ -213,14 +179,14 @@ export default function EmployeeDetails(props) {
 
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Age *</div>
-                            <input type="number" name={`family.${index}.age`} ref={register({required: true})}
+                            <input defaultValue={item?.age} type="number" name={`family.${index}.age`} ref={register({required: true})}
                                    className="border p-2 w-full" placeholder="Enter your age"/>
                             {errors?.family && errors?.family[index] && errors?.family[index]?.age &&
                                 <small className="text-danger">Age is required</small>}
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Email Id *</div>
-                            <input type="text" name={`family.${index}.email`} ref={register({
+                            <input defaultValue={item?.email} type="text" name={`family.${index}.email`} ref={register({
                                 required: true, pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                 }
@@ -233,7 +199,7 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Contact Number *</div>
-                            <input type="number" name={`family.${index}.phone`}
+                            <input defaultValue={item?.phone} type="number" name={`family.${index}.phone`}
                                    ref={register({required: true, minLength: 10, maxLength: 10})}
                                    className="border p-2 w-full" placeholder="10-digit Mobile Number"/>
                             {errors?.family && errors?.family[index] && errors.family[index]?.phone?.type === "required" &&
@@ -247,7 +213,12 @@ export default function EmployeeDetails(props) {
                     </>
                 })}
                 <div onClick={() => append({
-                    name: ''
+                    name: '',
+                    gender: '',
+                    relationshipType: '',
+                    age: '',
+                    email: '',
+                    phone: '',
                 })} className="text-primary font-medium my-3 cursor-pointer">
                     <span className="rounded px-1 border border-primary mr-1">+</span>
                     Add another family member
@@ -278,8 +249,8 @@ export default function EmployeeDetails(props) {
             }
             if(responseData.employee){
                 setEmployeeData(responseData.employee);
-                if(status === 'confirmed') {
-                    setValues('gender1', responseData?.employee?.gender);
+                if(emailStatus === 'confirmed') {
+                    setValue('gender1', responseData?.employee?.gender);
                 }
             }
             setIdStatus("confirmed");
@@ -302,7 +273,8 @@ export default function EmployeeDetails(props) {
                         <div className="py-2 text-dark font-medium">Employee Id * &nbsp; {idStatus === 'confirmed' && '✅'} </div>
                         <input
                             disabled={idStatus === 'confirmed'}
-                            onChange={(event)=>setRefresh(event.target.value)} type="text" name="id" ref={register({required: true})}
+                            // onChange={(event)=>setRefresh(event.target.value)}
+                            type="text" name="id" ref={register({required: true})}
                                className="border p-2 w-full" placeholder="Employee Id"/>
                         {errors.id && <small className="text-danger">Employee ID is required</small>}
                         <div className="my-2.5 flex flex-row">
@@ -314,9 +286,9 @@ export default function EmployeeDetails(props) {
                                 </button>
                             </>}
 
-                            {!idSpinning && idStatus === "confirmed" && status !== 'confirmed' && <>
+                            {!idSpinning && idStatus === "confirmed" && emailStatus !== 'confirmed' && <>
                                 <button onClick={()=> {
-                                    // if(status === 'confirmed') setStatus("email");
+                                    // if(emailStatus === 'confirmed') setEmailStatus("email");
                                     setIdStatus("pending");
                                 }} type="button"
                                         className="text-blue-500 bg-white hover:bg-gray-200 font-medium text-xs px-2 py-2 text-center inline-flex items-center">
@@ -330,16 +302,18 @@ export default function EmployeeDetails(props) {
                     <div className="col-md-6">
                         <div className="py-2 text-dark font-medium">Email Id *</div>
                         <div className="flex flex-row col-md-12 align-items-center">
-                            <input disabled={!getValues("id") || status !== "email"} onChange={({target: {value}}) => {
+                            <input
+                                disabled={emailStatus !== "email"}
+                                   onChange={({target: {value}}) => {
                                 setEmail(value);
                             }} type="text" name="email1" ref={register({
                                 required: true, pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                 }
                             })}
-                                   className={`${status === "email" ? 'w-full' : 'col-md-6'} border p-2 `} placeholder="Enter your Email ID"/>
+                                   className={`${emailStatus === "email" ? 'w-full' : 'col-md-6'} border p-2 `} placeholder="Enter your Email ID"/>
 
-                            {status==='otp' && <OtpInput
+                            {emailStatus==='otp' && <OtpInput
                                 inputStyle={{
                                     border: '1px solid #eee',
                                     width: 32,
@@ -352,7 +326,7 @@ export default function EmployeeDetails(props) {
                                 separator={<span>-</span>}
                             />}
 
-                            {status === "confirmed" &&
+                            {emailStatus === "confirmed" &&
                                 <small className="text-success ml-4">✅ &nbsp;Email is Verified</small>}
 
                         </div>
@@ -360,11 +334,9 @@ export default function EmployeeDetails(props) {
                             <small className="text-danger">Email Id is required</small>}
                         {errors.email1?.type === "pattern" &&
                             <small className="text-danger">Enter valid email address</small>}
-                        {emailError &&
-                            <small className="text-danger">{emailError}</small>}
                         <div className="my-2.5 flex flex-row">
                             {spinning && <SyncLoader size={15} margin={2} /> }
-                            {!spinning && status === "email" && <button onClick={sendOTP} type="button"
+                            {!spinning && emailStatus === "email" && <button onClick={sendOTP} type="button"
                                                                         className="text-gray-900 bg-white hover:bg-gray-200 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200">
                                 <svg className="mr-1" version="1.1" width={16} height={16} viewBox="0 0 256 256">
                                     <g transform="translate(128 128) scale(0.72 0.72)" style={{}}>
@@ -449,8 +421,8 @@ export default function EmployeeDetails(props) {
                                 </svg>
                                 Send OTP
                             </button>}
-                            {!spinning && status === "otp" && <>
-                                <button onClick={()=>setStatus('email')} type="button"
+                            {!spinning && emailStatus === "otp" && <>
+                                <button onClick={()=>setEmailStatus('email')} type="button"
                                         className="text-blue-500 bg-white hover:bg-gray-200 font-medium text-xs px-2 py-2 text-center inline-flex items-center">
                                     Edit Email
                                 </button>
@@ -496,14 +468,14 @@ export default function EmployeeDetails(props) {
                     <div className="col-md-6 mt-3">
                         <div className="py-2 text-dark font-medium">Employee Name</div>
                         <span className="form-label">
-                            {(employeeData && status === 'confirmed' && idStatus === 'confirmed' ) ? employeeData?.name : "N/A" }
+                            {(employeeData && emailStatus === 'confirmed' && idStatus === 'confirmed' ) ? employeeData?.name : "N/A" }
                         </span>
                     </div>
 
                     <div className="col-md-6 mt-3">
                         <div className="py-2 text-dark font-medium">Employee Age</div>
                         <span className="form-label">
-                            {(employeeData && status === 'confirmed' && idStatus === 'confirmed' ) ? employeeData?.age : "N/A" }
+                            {(employeeData && emailStatus === 'confirmed' && idStatus === 'confirmed' ) ? employeeData?.age : "N/A" }
                         </span>
                     </div>
 
@@ -512,7 +484,12 @@ export default function EmployeeDetails(props) {
                         </> : <>
                             <div onClick={() => {
                                 append({
-                                    name: 'append'
+                                    name: '',
+                                    gender: '',
+                                    relationshipType: '',
+                                    age: '',
+                                    email: '',
+                                    phone: '',
                                 });
                                 setFamily(true)
                             }} className="text-primary font-medium my-3 cursor-pointer">
@@ -526,9 +503,6 @@ export default function EmployeeDetails(props) {
 
                     <div className="col-md-12">
                         <button
-                            // // disabled={status !== "confirmed"}
-                            // onClick={()=>status !== "confirmed" && NotificationManager.warning('Please Verify your email first!!')}
-                            // type={status === "confirmed" ? "submit" : "button"}
                             type={"submit"}
                                 className="cursor-pointer p-2 px-3 bg-success text-white text-center w-1/2 md:w-1/6 mt-3">Continue
                         </button>
