@@ -40,9 +40,31 @@ export default function EmployeeDetails(props) {
     const {setValue, getValues, register, handleSubmit, errors, control} = useForm({
         defaultValues
     });
-    const {fields, remove, append} = useFieldArray({
+
+    console.log('getValues unique', getValues('family'));
+
+
+
+    const {fields, remove, append, update} = useFieldArray({
         control, name: 'family'
     });
+
+    // default values when user return to this tab, doesnot work
+    useEffect(() => {
+        if(update && values?.employeeDetails.length) {
+            const families = [];
+            values?.employeeDetails?.map((value, index) => {
+                if (index === 0) return;
+                console.log('value employee', value);
+                const familyDetail = {
+                    name: value.name, phone: value.phone, email: value.email, age: value.age, gender: value.gender,
+                };
+                append(familyDetail);
+            });
+            setRefresh(value => !value);
+
+        }
+    }, [update, values?.employeeDetails]);
 
     const [idproof, setIdproof] = React.useState("")
     const [email, setEmail] = React.useState(values.employeeDetails[0]?.email || "");
@@ -87,7 +109,7 @@ export default function EmployeeDetails(props) {
             }
 
             // var emp2 = {name:data.name2,gender:data.gender,age:data.age,phone:data.phone2,email:data.email2}
-            setValues({...values, employeeDetails: family ? [emp1, ...data?.family] : [emp1]})
+            setValues({...values, employeeDetails: (family && data?.family?.length > 0) ? [emp1, ...data?.family] : [emp1]})
             handleStep();
         } else {
             return NotificationManager.error('Please validate your Employee ID');
@@ -161,14 +183,14 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4" key={item?.id}>
                             <div className="py-2 text-dark font-medium">Name *</div>
-                            <input type="text" name={`family[${index}].name`} ref={register({required: true})}
+                            <input type="text" name={`family.${index}.name`} ref={register({required: true})}
                                    className="border p-2 w-full" placeholder="Your Full Name"/>
                             {errors?.family && errors?.family[index] && errors?.family[index]?.name &&
                                 <small className="text-danger">Name is required</small>}
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Gender *</div>
-                            <select name={`family[${index}].gender`} className="form-select"
+                            <select name={`family.${index}.gender`} className="form-select"
                                     ref={register({required: true})}>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -178,7 +200,7 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Relationship with Employee *</div>
-                            <select name={`family[${index}].relationshipType`} className="form-select"
+                            <select name={`family.${index}.relationshipType`} className="form-select"
                                     ref={register({required: true})}>
                                 <option value="">- Select -</option>
                                 {["Father", "Mother", "Father in Law", "Mother in Law", "Husband", "Wife", "Son", "Daughter", "Brother", "Sister", "Friend",].map((relation) =>
@@ -191,14 +213,14 @@ export default function EmployeeDetails(props) {
 
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Age *</div>
-                            <input type="number" name={`family[${index}].age`} ref={register({required: true})}
+                            <input type="number" name={`family.${index}.age`} ref={register({required: true})}
                                    className="border p-2 w-full" placeholder="Enter your age"/>
                             {errors?.family && errors?.family[index] && errors?.family[index]?.age &&
                                 <small className="text-danger">Age is required</small>}
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Email Id *</div>
-                            <input type="text" name={`family[${index}].email`} ref={register({
+                            <input type="text" name={`family.${index}.email`} ref={register({
                                 required: true, pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                 }
@@ -211,7 +233,7 @@ export default function EmployeeDetails(props) {
                         </div>
                         <div className="col-md-4">
                             <div className="py-2 text-dark font-medium">Contact Number *</div>
-                            <input type="number" name={`family[${index}].phone`}
+                            <input type="number" name={`family.${index}.phone`}
                                    ref={register({required: true, minLength: 10, maxLength: 10})}
                                    className="border p-2 w-full" placeholder="10-digit Mobile Number"/>
                             {errors?.family && errors?.family[index] && errors.family[index]?.phone?.type === "required" &&
@@ -294,6 +316,7 @@ export default function EmployeeDetails(props) {
 
                             {!idSpinning && idStatus === "confirmed" && status !== 'confirmed' && <>
                                 <button onClick={()=> {
+                                    // if(status === 'confirmed') setStatus("email");
                                     setIdStatus("pending");
                                 }} type="button"
                                         className="text-blue-500 bg-white hover:bg-gray-200 font-medium text-xs px-2 py-2 text-center inline-flex items-center">
