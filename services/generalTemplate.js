@@ -230,26 +230,6 @@ module.exports = {
                             <td className="head">Package Name</td>
                             <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.packages?.packageName}</td>
                           </tr>
-                          ${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.packages?.customized ? `<tr>
-                            <td className="head">Package Description</td>
-                            <td>${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.packages?.customized}</td>
-                          </tr>` : ``}
-                          <tr>
-                            <td className="head">AddOnPackages</td>
-                            <!-- table -->
-                            <td>
-                                ${body?.packageDetails && body?.packageDetails[index] && body?.packageDetails[index]?.packages?.addOnPackages?.map((addon, index) => {
-                    return `<table>
-                                <tr>
-                                   <td>${index+1}</td>
-                                  <td className="head">${addon?.name}</td>
-                                  <td className="head">${addon?.price}</td>
-                                </tr>
-                              </table>`
-                })}
-                            </td>
-                            <!-- table end -->
-                          </tr>
                         </table>
                       </td>
                     </tr>
