@@ -340,7 +340,7 @@ export default function AppointmentDetails(props) {
               )}
             </div>
 
-            {false && <>
+            {true && <>
               <div className="col-md-12">
                 <div className="py-2 text-dark font-medium">
                   Select An Appointment*

@@ -199,7 +199,7 @@ function App() {
       currency: data.currency,
       amount: totalAmount,
       order_id: data.id,
-      name: 'Betacura Test',
+      name: 'BNY AHC',
       description: 'Payment',
       image: `${process.env.REACT_APP_API_HOST}/api/appointment/logo`,
       handler: function (response) {

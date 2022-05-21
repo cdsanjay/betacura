@@ -156,16 +156,6 @@ module.exports = {
               <td className="head">Mobile</td>
               <td>${body.mobile}</td>
             </tr>
-            <tr>
-              <td className="head">ID Type</td>
-              <td>${body.identificationType}</td>
-            </tr>
-            <tr>
-              <td className="head">ID Type</td>
-              <td>
-                <img src="${body.identificationDocUrl}" width="150" alt="${body.identificationType}" />
-              </td>
-            </tr>
             <!-- packge table -->
             <tr>
               <td className="head">PackageDetails</td>
